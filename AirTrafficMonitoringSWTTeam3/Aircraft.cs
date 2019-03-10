@@ -20,6 +20,7 @@ namespace AirTrafficMonitoringSWTTeam3
         public int Altitude { get; set; }
         public double HorizontalVelocity { get; set; }
         public int CompassCourse { get; set; }
+        public string Timestamp { get; set; }
 
     }
 }
