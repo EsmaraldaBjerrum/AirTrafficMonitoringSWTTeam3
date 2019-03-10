@@ -24,7 +24,25 @@ namespace AirTrafficMonitoringSWTTeam3
 
         private void AirSpace(object sender, RawTransponderDataEventArgs e)
         {
+            
+            foreach (var data in e.TransponderData)
+            {
+                string[] aircraftdata = new string[5];
+                aircraftdata = data.Split(';');
+                int xCoordinate = Convert.ToInt32(aircraftdata[2]);
+                int yCoordinate = Convert.ToInt32(aircraftdata[3]);
 
+                if (xCoordinate <= 85000 && yCoordinate <= 85000)
+                {
+                    Aircraft aircraft = new Aircraft();
+                    aircraft.Tag = aircraftdata[0];
+                    aircraft.XCoordinate = xCoordinate;
+                    aircraft.YCoordinate = yCoordinate;
+                    aircraft.Altitude = Convert.ToInt32(aircraftdata[3]);
+                    aircraft.Timestamp = aircraftdata[4];
+                    currentAircrafts.Add(aircraft);
+                }
+            }
         }
 
         public void CalculateCompassCourse(List<Aircraft> aircrafts)
