@@ -13,8 +13,7 @@ namespace AirTrafficMonitoringSWTTeam3
 
       public List<Aircraft> currentAircrafts;
       private double velocity;
-       private DateTime myDate = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
-           System.Globalization.CultureInfo.InvariantCulture);
+      
 
         public Calculator(ITransponderReceiver transponderReceiver)
       {
