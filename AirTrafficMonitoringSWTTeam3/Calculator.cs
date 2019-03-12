@@ -37,7 +37,7 @@ namespace AirTrafficMonitoringSWTTeam3
                 if (xCoordinate <= 85000 && yCoordinate <= 85000)
                 {
                     Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate, Convert.ToInt32(aircraftdata[3]), Convert.ToDateTime(aircraftdata[4]));
-                    Aircraft aircraft = new Aircraft();
+                   Aircraft aircraft = new Aircraft();
                     aircraft.Tag = aircraftdata[0];
                     aircraft.XCoordinate = xCoordinate;
                     aircraft.YCoordinate = yCoordinate;
@@ -111,7 +111,7 @@ namespace AirTrafficMonitoringSWTTeam3
             currentAircrafts = aircrafts;
         }
 
-        public double HorizontalVelocity(List<Aircraft> aircrafts)
+        public void HorizontalVelocity(List<Aircraft> aircrafts)
         {
             foreach (Aircraft aircraft in aircrafts)
             {
@@ -120,7 +120,7 @@ namespace AirTrafficMonitoringSWTTeam3
                     if (currentAircraft.Tag == aircraft.Tag)
                     {
                         DateTime oldDateTime = currentAircraft.Timestamp;
-                        DateTime newDateTime = currentAircraft.Timestamp;
+                        DateTime newDateTime = aircraft.Timestamp;
                         double interval = (newDateTime - oldDateTime).TotalSeconds;
 
                         double distance =
@@ -130,9 +130,11 @@ namespace AirTrafficMonitoringSWTTeam3
                         velocity = distance / interval;
                     }
                 }
+
+               aircraft.HorizontalVelocity = velocity;
             }
 
-            return velocity;
+          
         }
     }
 }

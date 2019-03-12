@@ -42,7 +42,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [Test]
         public void CalculateCompassCourse_()
         {
-            _fakeTransponderReceiver.   
+           // _fakeTransponderReceiver.   
         }
 
        [Test]
@@ -50,8 +50,27 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
        {
           List<Aircraft> testAircraftsList = new List<Aircraft>();
          
-          testAircraftsList.Add(new Aircraft("ATR423",39045,12932,14000, ));
+          testAircraftsList.Add(new Aircraft("ATR423",39045,12932,14000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture))));
+         testAircraftsList.Add(new Aircraft("BCD123", 10005, 85890, 12000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture)))); 
+          testAircraftsList.Add(new Aircraft("XYZ987", 25059, 75654, 4000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture))));
+
+          List<Aircraft> newtestAircraftsList = new List<Aircraft>();
+          newtestAircraftsList.Add(new Aircraft("ATR423", 45000, 15940, 16000, (DateTime.ParseExact("20151006214356895", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture))));
+          newtestAircraftsList.Add(new Aircraft("ACD123", 10005, 85890, 12000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture))));
+          newtestAircraftsList.Add(new Aircraft("XYZ987", 30000, 80654, 8000, (DateTime.ParseExact("20151006214518566", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture))));
+
+          uut.currentAircrafts = testAircraftsList;
+
+          uut.HorizontalVelocity(newtestAircraftsList);
+
+          Assert.That(newtestAircraftsList[0].HorizontalVelocity, Is.EqualTo(540.106));
        }
-    }
+   }
 
 }
