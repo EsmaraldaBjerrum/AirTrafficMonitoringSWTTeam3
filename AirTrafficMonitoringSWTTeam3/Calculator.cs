@@ -39,7 +39,7 @@ namespace AirTrafficMonitoringSWTTeam3
                     aircraft.XCoordinate = xCoordinate;
                     aircraft.YCoordinate = yCoordinate;
                     aircraft.Altitude = Convert.ToInt32(aircraftdata[3]);
-                    aircraft.Timestamp = aircraftdata[4];
+                    aircraft.Timestamp = Convert.ToDateTime(aircraftdata[4]);
                     currentAircrafts.Add(aircraft);
                 }
             }
