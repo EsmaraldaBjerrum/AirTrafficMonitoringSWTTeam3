@@ -35,7 +35,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
        {
           List<Aircraft> testAircraftsList = new List<Aircraft>();
          
-          
+          testAircraftsList.Add(new Aircraft("ATR423",39045,12932,14000, ));
        }
     }
 
