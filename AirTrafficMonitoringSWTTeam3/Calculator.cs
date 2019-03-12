@@ -31,8 +31,8 @@ namespace AirTrafficMonitoringSWTTeam3
             {
                 string[] aircraftdata = new string[5];
                 aircraftdata = data.Split(';');
-                int xCoordinate = Convert.ToInt32(aircraftdata[2]);
-                int yCoordinate = Convert.ToInt32(aircraftdata[3]);
+                int xCoordinate = Convert.ToInt32(aircraftdata[1]);
+                int yCoordinate = Convert.ToInt32(aircraftdata[2]);
 
                 if (xCoordinate <= 85000 && yCoordinate <= 85000)
                 {
