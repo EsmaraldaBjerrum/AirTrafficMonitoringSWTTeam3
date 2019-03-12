@@ -139,7 +139,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
           uut.HorizontalVelocity(newtestAircraftsList);
 
-          Assert.That(newtestAircraftsList[0].HorizontalVelocity, Is.EqualTo(540.106));
+          Assert.That(newtestAircraftsList[0].HorizontalVelocity, Is.EqualTo(12.352).Within(00.001));
        }
    }
 
