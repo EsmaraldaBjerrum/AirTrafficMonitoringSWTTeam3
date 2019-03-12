@@ -137,9 +137,10 @@ namespace AirTrafficMonitoringSWTTeam3
 
                         velocity = distance / interval;
                     }
-                }
+                   currentAircraft.HorizontalVelocity = velocity;
+            }
 
-               aircraft.HorizontalVelocity = velocity;
+             
             }
 
           

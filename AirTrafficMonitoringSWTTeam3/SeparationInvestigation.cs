@@ -8,15 +8,15 @@ namespace AirTrafficMonitoringSWTTeam3
 {
     class SeparationInvestigation
     {
-        public bool Separation(List<Aircraft> currentAircrafts)
-        {
-            foreach (Aircraft aircarft in currentAircrafts)
-            {
-                for (int i = 0; i < currentAircrafts.Count; i++)
-                {
-                    if (aircarft.Tag == )
-                }
-            }
-        }
+        //public bool Separation(List<Aircraft> currentAircrafts)
+        //{
+        //    foreach (Aircraft aircarft in currentAircrafts)
+        //    {
+        //        for (int i = 0; i < currentAircrafts.Count; i++)
+        //        {
+        //            if (aircarft.Tag == )
+        //        }
+        //    }
+        //}
     }
 }
