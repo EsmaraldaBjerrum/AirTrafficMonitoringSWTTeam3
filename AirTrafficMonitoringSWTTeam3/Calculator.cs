@@ -49,8 +49,8 @@ namespace AirTrafficMonitoringSWTTeam3
                 {
                     if (aircraft.Tag == currentAircraft.Tag)
                     {
-                        double xDifference = currentAircraft.XCoordinate - aircraft.XCoordinate;
-                        double yDifference = currentAircraft.YCoordinate - aircraft.YCoordinate;
+                        double xDifference = aircraft.XCoordinate - currentAircraft.XCoordinate;
+                        double yDifference = aircraft.YCoordinate - currentAircraft.YCoordinate;
 
                         if (xDifference == 0)
                         {
