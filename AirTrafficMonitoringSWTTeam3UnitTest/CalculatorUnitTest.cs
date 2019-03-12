@@ -5,18 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using AirTrafficMonitoringSWTTeam3;
+using TransponderReceiver;
+using NSubstitute;
 
 namespace AirTrafficMonitoringSWTTeam3UnitTest
 {
     [TestFixture]
     public class CalculatorUnitTest
     {
+
+        private ITransponderReceiver _fakeTransponderReceiver;
         private Calculator uut;
 
         [SetUp]
         public void SetUp()
         {
-
+            _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
+            uut = new Calculator(_fakeTransponderReceiver);
         }
 
         [Test]
