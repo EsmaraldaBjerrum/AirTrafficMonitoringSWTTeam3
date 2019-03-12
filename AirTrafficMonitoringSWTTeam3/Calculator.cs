@@ -36,14 +36,9 @@ namespace AirTrafficMonitoringSWTTeam3
 
                 if (xCoordinate <= 85000 && yCoordinate <= 85000)
                 {
-                    Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate, Convert.ToInt32(aircraftdata[3]), Convert.ToDateTime(aircraftdata[4]));
-                    Aircraft aircraft = new Aircraft();
-                    aircraft.Tag = aircraftdata[0];
-                    aircraft.XCoordinate = xCoordinate;
-                    aircraft.YCoordinate = yCoordinate;
-                    aircraft.Altitude = Convert.ToInt32(aircraftdata[3]);
-                    aircraft.Timestamp = DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
-                        System.Globalization.CultureInfo.InvariantCulture);
+                    Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate, Convert.ToInt32(aircraftdata[3]), DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
+                        System.Globalization.CultureInfo.InvariantCulture));
+                    
                     currentAircrafts.Add(aircraft);
                 }
             }
