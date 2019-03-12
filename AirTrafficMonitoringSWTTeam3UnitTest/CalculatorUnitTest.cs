@@ -29,5 +29,14 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         {
 
         }
+
+       [Test]
+       public void HorizontalVelocity()
+       {
+          List<Aircraft> testAircraftsList = new List<Aircraft>();
+         
+          
+       }
     }
+
 }
