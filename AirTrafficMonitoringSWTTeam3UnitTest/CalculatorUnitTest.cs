@@ -42,7 +42,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [Test]
         public void CalculateCompassCourse_()
         {
-
+            _fakeTransponderReceiver.   
         }
     }
 }
