@@ -11,20 +11,21 @@ namespace AirTrafficMonitoringSWTTeam3
     {
         private ITransponderReceiver _transponderReceiver;
 
-        public List<Aircraft> currentAircrafts;
-        private double velocity;
+      public List<Aircraft> currentAircrafts;
+      private double velocity;
+      
 
         public Calculator(ITransponderReceiver transponderReceiver)
-        {
-            currentAircrafts = new List<Aircraft>();
+      {
+         currentAircrafts = new List<Aircraft>();
 
             _transponderReceiver = transponderReceiver;
 
             _transponderReceiver.TransponderDataReady += AirSpace;
         }
 
-        private void AirSpace(object sender, RawTransponderDataEventArgs e)
-        {
+      public void AirSpace(object sender, RawTransponderDataEventArgs e)
+      {
 
             foreach (var data in e.TransponderData)
             {
@@ -36,6 +37,13 @@ namespace AirTrafficMonitoringSWTTeam3
                 if (xCoordinate <= 85000 && yCoordinate <= 85000)
                 {
                     Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate, Convert.ToInt32(aircraftdata[3]), Convert.ToDateTime(aircraftdata[4]));
+                    Aircraft aircraft = new Aircraft();
+                    aircraft.Tag = aircraftdata[0];
+                    aircraft.XCoordinate = xCoordinate;
+                    aircraft.YCoordinate = yCoordinate;
+                    aircraft.Altitude = Convert.ToInt32(aircraftdata[3]);
+                    aircraft.Timestamp = DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
+                        System.Globalization.CultureInfo.InvariantCulture);
                     currentAircrafts.Add(aircraft);
                 }
             }
