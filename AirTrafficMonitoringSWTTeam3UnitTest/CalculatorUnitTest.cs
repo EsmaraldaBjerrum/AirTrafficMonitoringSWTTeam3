@@ -110,7 +110,6 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
 
         [Test]
-        public void CalculateCompassCourse_()
         [TestCase(5,7)]
         public void CalculateCompassCourse_ZCurrentAircraft_QNewAircraft_ResultsInQCurrentAircrafts(int Z, int Q)
         {
@@ -138,9 +137,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
             Assert.That(uut.currentAircrafts[0].CompassCourse, Is.EqualTo(course1));
         }
-    }
-            //_fakeTransponderReceiver.   
-        }
+    
 
        [Test]
        public void HorizontalVelocity()
