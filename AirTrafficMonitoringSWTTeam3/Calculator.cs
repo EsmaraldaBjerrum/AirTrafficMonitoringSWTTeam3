@@ -11,10 +11,12 @@ namespace AirTrafficMonitoringSWTTeam3
    {
       private ITransponderReceiver _transponderReceiver;
 
-      private List<Aircraft> currentAircrafts;
+      public List<Aircraft> currentAircrafts;
       private double velocity;
+       private DateTime myDate = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
+           System.Globalization.CultureInfo.InvariantCulture);
 
-      public Calculator(ITransponderReceiver transponderReceiver)
+        public Calculator(ITransponderReceiver transponderReceiver)
       {
          currentAircrafts = new List<Aircraft>();
 
@@ -23,7 +25,7 @@ namespace AirTrafficMonitoringSWTTeam3
          _transponderReceiver.TransponderDataReady += AirSpace;
       }
 
-      private void AirSpace(object sender, RawTransponderDataEventArgs e)
+      public void AirSpace(object sender, RawTransponderDataEventArgs e)
       {
 
          foreach (var data in e.TransponderData)
@@ -40,7 +42,8 @@ namespace AirTrafficMonitoringSWTTeam3
                     aircraft.XCoordinate = xCoordinate;
                     aircraft.YCoordinate = yCoordinate;
                     aircraft.Altitude = Convert.ToInt32(aircraftdata[3]);
-                    aircraft.Timestamp = Convert.ToDateTime(aircraftdata[4]);
+                    aircraft.Timestamp = DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
+                        System.Globalization.CultureInfo.InvariantCulture);
                     currentAircrafts.Add(aircraft);
                 }
             }
