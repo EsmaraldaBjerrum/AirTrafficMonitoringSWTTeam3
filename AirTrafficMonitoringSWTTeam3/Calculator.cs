@@ -41,7 +41,20 @@ namespace AirTrafficMonitoringSWTTeam3
                     
                     currentAircrafts.Add(aircraft);
                 }
+
+                //AirspaceDataEvent e = new AirspaceDataEvent(currentAircrafts);
+                    
+
+    }
+        }
+
+        public class AirspaceDataEvent : EventArgs
+        {
+            public AirspaceDataEvent(List<Aircraft> transponderData)
+            {
+                TransponderData = transponderData;
             }
+            public List<Aircraft> TransponderData { get; }
         }
 
         public void CalculateCompassCourse(List<Aircraft> aircrafts)
