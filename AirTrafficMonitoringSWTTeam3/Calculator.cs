@@ -116,8 +116,8 @@ namespace AirTrafficMonitoringSWTTeam3
             {
                if (currentAircraft.Tag == aircraft.Tag)
                {
-                  DateTime oldDateTime = new DateTime(currentAircraft.Timestamp);
-                  DateTime newDateTime = new DateTime(currentAircraft.Timestamp);
+                  DateTime oldDateTime = currentAircraft.Timestamp;
+                  DateTime newDateTime = currentAircraft.Timestamp;
                   double interval = (newDateTime - oldDateTime).TotalSeconds;
 
                   double distance =
