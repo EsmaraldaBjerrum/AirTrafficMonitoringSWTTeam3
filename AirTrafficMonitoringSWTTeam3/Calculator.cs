@@ -11,34 +11,50 @@ namespace AirTrafficMonitoringSWTTeam3
     {
         private ITransponderReceiver _transponderReceiver;
 
-        public List<Aircraft> currentAircrafts;
-        private double velocity;
+      public List<Aircraft> currentAircrafts;
+      private double velocity;
+      
 
         public Calculator(ITransponderReceiver transponderReceiver)
-        {
-            currentAircrafts = new List<Aircraft>();
+      {
+         currentAircrafts = new List<Aircraft>();
 
             _transponderReceiver = transponderReceiver;
 
             _transponderReceiver.TransponderDataReady += AirSpace;
         }
 
-        private void AirSpace(object sender, RawTransponderDataEventArgs e)
-        {
+      public void AirSpace(object sender, RawTransponderDataEventArgs e)
+      {
 
             foreach (var data in e.TransponderData)
             {
                 string[] aircraftdata = new string[5];
                 aircraftdata = data.Split(';');
-                int xCoordinate = Convert.ToInt32(aircraftdata[2]);
-                int yCoordinate = Convert.ToInt32(aircraftdata[3]);
+                int xCoordinate = Convert.ToInt32(aircraftdata[1]);
+                int yCoordinate = Convert.ToInt32(aircraftdata[2]);
 
                 if (xCoordinate <= 85000 && yCoordinate <= 85000)
                 {
-                    Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate, Convert.ToInt32(aircraftdata[3]), Convert.ToDateTime(aircraftdata[4]));
+                    Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate, Convert.ToInt32(aircraftdata[3]), DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
+                        System.Globalization.CultureInfo.InvariantCulture));
+                    
                     currentAircrafts.Add(aircraft);
                 }
+
+                //AirspaceDataEvent e = new AirspaceDataEvent(currentAircrafts);
+                    
+
+    }
+        }
+
+        public class AirspaceDataEvent : EventArgs
+        {
+            public AirspaceDataEvent(List<Aircraft> transponderData)
+            {
+                TransponderData = transponderData;
             }
+            public List<Aircraft> TransponderData { get; }
         }
 
         public void CalculateCompassCourse(List<Aircraft> aircrafts)
@@ -103,7 +119,7 @@ namespace AirTrafficMonitoringSWTTeam3
             currentAircrafts = aircrafts;
         }
 
-        public double HorizontalVelocity(List<Aircraft> aircrafts)
+        public void HorizontalVelocity(List<Aircraft> aircrafts)
         {
             foreach (Aircraft aircraft in aircrafts)
             {
@@ -112,7 +128,7 @@ namespace AirTrafficMonitoringSWTTeam3
                     if (currentAircraft.Tag == aircraft.Tag)
                     {
                         DateTime oldDateTime = currentAircraft.Timestamp;
-                        DateTime newDateTime = currentAircraft.Timestamp;
+                        DateTime newDateTime = aircraft.Timestamp;
                         double interval = (newDateTime - oldDateTime).TotalSeconds;
 
                         double distance =
@@ -122,9 +138,11 @@ namespace AirTrafficMonitoringSWTTeam3
                         velocity = distance / interval;
                     }
                 }
+
+               aircraft.HorizontalVelocity = velocity;
             }
 
-            return velocity;
+          
         }
     }
 }
