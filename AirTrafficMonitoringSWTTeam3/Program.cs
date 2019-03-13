@@ -11,7 +11,20 @@ namespace AirTrafficMonitoringSWTTeam3
     {
         static void Main(string[] args)
         {
+         ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
+         var system = new Calculator(receiver);
+
+         while (true)
+         {
+            foreach (Aircraft track in system.currentAircrafts)
+            {
+               Console.WriteLine(track.Tag, track.XCoordinate, track.YCoordinate);
+             }
+
+         }
+
+         Console.ReadKey();
         }
     }
 }
