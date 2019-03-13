@@ -7,25 +7,29 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
-    public class Calculator
+    public partial class Calculator
     {
         private ITransponderReceiver _transponderReceiver;
 
-      public List<Aircraft> currentAircrafts;
+        public List<Aircraft> WithoutDataAircrafts;
+        public List<Aircraft> WithDataAircrafts;
       private double velocity;
-      
+        public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
+
+
 
         public Calculator(ITransponderReceiver transponderReceiver)
       {
-         currentAircrafts = new List<Aircraft>();
+            WithoutDataAircrafts = new List<Aircraft>();
+            WithDataAircrafts = new List<Aircraft>();
 
             _transponderReceiver = transponderReceiver;
 
             _transponderReceiver.TransponderDataReady += AirSpace;
         }
 
-      public void AirSpace(object sender, RawTransponderDataEventArgs e)
-      {
+        public void AirSpace(object sender, RawTransponderDataEventArgs e)
+        {
 
             foreach (var data in e.TransponderData)
             {
@@ -36,47 +40,51 @@ namespace AirTrafficMonitoringSWTTeam3
 
                 if (xCoordinate <= 85000 && yCoordinate <= 85000)
                 {
-                    Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate, Convert.ToInt32(aircraftdata[3]), DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
-                        System.Globalization.CultureInfo.InvariantCulture));
-                    
-                    currentAircrafts.Add(aircraft);
+                    Aircraft aircraft = new Aircraft(aircraftdata[0], xCoordinate, yCoordinate,
+                        Convert.ToInt32(aircraftdata[3]), DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
+                            System.Globalization.CultureInfo.InvariantCulture));
+
+                    WithoutDataAircrafts.Add(aircraft);
                 }
 
-                //AirspaceDataEvent e = new AirspaceDataEvent(currentAircrafts);
-                    
+                CalculateCompassCourse(WithDataAircrafts);
+                HorizontalVelocity(WithoutDataAircrafts);
+                WithDataAircrafts = WithoutDataAircrafts;
+                WithoutDataAircrafts.Clear();
 
-    }
-        }
-
-        public class AirspaceDataEvent : EventArgs
-        {
-            public AirspaceDataEvent(List<Aircraft> transponderData)
-            {
-                TransponderData = transponderData;
-            }
-            public List<Aircraft> TransponderData { get; }
-        }
-
-        public void CalculateCompassCourse(List<Aircraft> aircrafts)
-        {
-            foreach (Aircraft aircraft in aircrafts)
-            {
-                foreach (Aircraft currentAircraft in currentAircrafts)
+                foreach (Aircraft track in WithDataAircrafts)
                 {
-                    if (aircraft.Tag == currentAircraft.Tag)
+                    Console.WriteLine(track.Tag);
+                }
+
+
+                AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
+
+
+            }
+        }
+
+
+        public void CalculateCompassCourse(List<Aircraft> WithoutDataaircrafts)
+        {
+            foreach (Aircraft WithoutDataaircraft in WithoutDataaircrafts)
+            {
+                foreach (Aircraft WithDataAircraft in WithDataAircrafts)
+                {
+                    if (WithoutDataaircraft.Tag == WithDataAircraft.Tag)
                     {
-                        double xDifference = aircraft.XCoordinate - currentAircraft.XCoordinate;
-                        double yDifference = aircraft.YCoordinate - currentAircraft.YCoordinate;
+                        double xDifference = WithoutDataaircraft.XCoordinate - WithDataAircraft.XCoordinate;
+                        double yDifference = WithoutDataaircraft.YCoordinate - WithDataAircraft.YCoordinate;
 
                         if (xDifference == 0)
                         {
                             if (yDifference > 0)
                             {
-                                aircraft.CompassCourse = 0;
+                                WithoutDataaircraft.CompassCourse = 0;
                             }
                             else
                             {
-                                aircraft.CompassCourse = 180;
+                                WithoutDataaircraft.CompassCourse = 180;
                             }
                         }
 
@@ -84,60 +92,60 @@ namespace AirTrafficMonitoringSWTTeam3
                         {
                             if (xDifference > 0)
                             {
-                                aircraft.CompassCourse = 90;
+                                WithoutDataaircraft.CompassCourse = 90;
                             }
                             else
                             {
-                                aircraft.CompassCourse = 270;
+                                WithoutDataaircraft.CompassCourse = 270;
                             }
                         }
 
                         else
                         {
-                            aircraft.CompassCourse =
+                            WithoutDataaircraft.CompassCourse =
                                Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(xDifference / yDifference))));
 
                             if (xDifference > 0 && yDifference < 0)
                             {
-                                aircraft.CompassCourse += 90;
+                                WithoutDataaircraft.CompassCourse += 90;
                             }
 
                             if (xDifference < 0 && yDifference < 0)
                             {
-                                aircraft.CompassCourse += 180;
+                                WithoutDataaircraft.CompassCourse += 180;
                             }
 
                             if (xDifference < 0 && yDifference > 0)
                             {
-                                aircraft.CompassCourse += 270;
+                                WithoutDataaircraft.CompassCourse += 270;
                             }
                         }
                     }
                 }
             }
 
-            currentAircrafts = aircrafts;
+            
         }
 
-        public void HorizontalVelocity(List<Aircraft> aircrafts)
+        public void HorizontalVelocity(List<Aircraft> WithoutDataaircrafts)
         {
-            foreach (Aircraft aircraft in aircrafts)
+            foreach (Aircraft WithoutDataaircraft in WithoutDataaircrafts)
             {
-                foreach (Aircraft currentAircraft in currentAircrafts)
+                foreach (Aircraft WithDataAircraft in WithDataAircrafts)
                 {
-                    if (currentAircraft.Tag == aircraft.Tag)
+                    if (WithDataAircraft.Tag == WithoutDataaircraft.Tag)
                     {
-                        DateTime oldDateTime = currentAircraft.Timestamp;
-                        DateTime newDateTime = aircraft.Timestamp;
+                        DateTime oldDateTime = WithDataAircraft.Timestamp;
+                        DateTime newDateTime = WithoutDataaircraft.Timestamp;
                         double interval = (newDateTime - oldDateTime).TotalSeconds;
 
                         double distance =
-                           Math.Sqrt(Math.Pow(aircraft.XCoordinate - currentAircraft.XCoordinate, 2) +
-                                     (Math.Pow(aircraft.YCoordinate - currentAircraft.YCoordinate, 2)));
+                           Math.Sqrt(Math.Pow(WithoutDataaircraft.XCoordinate - WithDataAircraft.XCoordinate, 2) +
+                                     (Math.Pow(WithoutDataaircraft.YCoordinate - WithDataAircraft.YCoordinate, 2)));
 
                         velocity = distance / interval;
                     }
-                   currentAircraft.HorizontalVelocity = velocity;
+                    WithoutDataaircraft.HorizontalVelocity = velocity;
             }
 
              

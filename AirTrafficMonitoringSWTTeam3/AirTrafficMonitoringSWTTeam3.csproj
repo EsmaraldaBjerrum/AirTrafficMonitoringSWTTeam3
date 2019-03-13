@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
+    <Compile Include="AirspaceDataEvent.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
