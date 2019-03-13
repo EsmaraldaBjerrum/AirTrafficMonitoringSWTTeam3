@@ -142,7 +142,6 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         }
 
         [Test]
-        //[TestCase("AAA111", 10000, 85000, 1000, "AAA111", 10001, 5000, 1000, 180)]
         [TestCase("BAA111", 10000, 60000, 1000, "BAA111", 10100, 50000, 1000, 91)]
         [TestCase("CAA111", 10000, 10000, 1000, "CAA111", 10100, 9900, 1000, 135)]
         [TestCase("DAA111", 60000, 10000, 1000, "DAA111", 70000, 9900, 1000, 179)]
