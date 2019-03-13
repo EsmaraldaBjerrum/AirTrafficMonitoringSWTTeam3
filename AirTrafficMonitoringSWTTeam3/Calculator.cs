@@ -11,18 +11,16 @@ namespace AirTrafficMonitoringSWTTeam3
     {
         private ITransponderReceiver _transponderReceiver;
 
-        public List<Aircraft> WithoutDataAircrafts;
-        public List<Aircraft> WithDataAircrafts;
-      private double velocity;
+        public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
+        public List<Aircraft> WithDataAircrafts = new List<Aircraft>();
+        private double velocity;
         public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
 
 
 
         public Calculator(ITransponderReceiver transponderReceiver)
       {
-            WithoutDataAircrafts = new List<Aircraft>();
-            WithDataAircrafts = new List<Aircraft>();
-
+            
             _transponderReceiver = transponderReceiver;
 
             _transponderReceiver.TransponderDataReady += AirSpace;
@@ -47,21 +45,20 @@ namespace AirTrafficMonitoringSWTTeam3
                     WithoutDataAircrafts.Add(aircraft);
                 }
 
-                CalculateCompassCourse(WithDataAircrafts);
-                HorizontalVelocity(WithoutDataAircrafts);
-                WithDataAircrafts = WithoutDataAircrafts;
-                WithoutDataAircrafts.Clear();
-
-                foreach (Aircraft track in WithDataAircrafts)
-                {
-                    Console.WriteLine(track.Tag);
-                }
-
-
-                AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
-
-
             }
+
+            CalculateCompassCourse(WithDataAircrafts);
+            HorizontalVelocity(WithoutDataAircrafts);
+            WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
+
+
+            foreach (Aircraft track in WithDataAircrafts)
+            {
+                Console.WriteLine(track.Tag + " " + track.XCoordinate + " " + track.YCoordinate + " " + track.CompassCourse + " " + track.Timestamp + " " + track.HorizontalVelocity );
+            }
+            WithoutDataAircrafts.Clear();
+
+            AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
         }
 
 
@@ -140,16 +137,18 @@ namespace AirTrafficMonitoringSWTTeam3
                         double interval = (newDateTime - oldDateTime).TotalSeconds;
 
                         double distance =
-                           Math.Sqrt(Math.Pow(WithoutDataaircraft.XCoordinate - WithDataAircraft.XCoordinate, 2) +
-                                     (Math.Pow(WithoutDataaircraft.YCoordinate - WithDataAircraft.YCoordinate, 2)));
+                            Math.Sqrt(Math.Pow(WithoutDataaircraft.XCoordinate - WithDataAircraft.XCoordinate, 2) +
+                                      (Math.Pow(WithoutDataaircraft.YCoordinate - WithDataAircraft.YCoordinate, 2)));
 
                         velocity = distance / interval;
                     }
-                    WithoutDataaircraft.HorizontalVelocity = velocity;
+
+                    WithoutDataaircraft.HorizontalVelocity = Math.Round(velocity,2);
+                }
             }
 
              
-            }
+            
 
           
         }
