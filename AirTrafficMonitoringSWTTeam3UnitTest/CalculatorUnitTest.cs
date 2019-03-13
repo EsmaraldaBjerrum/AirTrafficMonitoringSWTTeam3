@@ -192,16 +192,15 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
        [TestCase("EDB239", 10000, 60000, 1000, "20191203214726980", "EDB239", 20000, 80000, 1000, "20191203215356990", 57.334)]
       public void HorizontalVelocity(string t1, int x1, int y1, int a1, string ts1, string t2, int x2, int y2, int a2, string ts2, double velocity1)
        {
-         uut.currentAircrafts.Add(new Aircraft(t1,x1,y1,a1, (DateTime.ParseExact(ts1, "yyyyMMddHHmmssfff",
+         uut.WithDataAircrafts.Add(new Aircraft(t1,x1,y1,a1, (DateTime.ParseExact(ts1, "yyyyMMddHHmmssfff",
             System.Globalization.CultureInfo.InvariantCulture))));
 
-          List<Aircraft> testAircraftsList = new List<Aircraft>();
-          testAircraftsList.Add(new Aircraft(t2,x2,y2,a2, (DateTime.ParseExact(ts2, "yyyyMMddHHmmssfff",
+        uut.WithoutDataAircrafts.Add(new Aircraft(t2,x2,y2,a2, (DateTime.ParseExact(ts2, "yyyyMMddHHmmssfff",
              System.Globalization.CultureInfo.InvariantCulture))));
          
-          uut.HorizontalVelocity(testAircraftsList);
+          uut.HorizontalVelocity(uut.WithoutDataAircrafts);
 
-          Assert.That(uut.currentAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.001));
+          Assert.That(uut.WithDataAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.001));
        }
    }
 
