@@ -47,7 +47,7 @@ namespace AirTrafficMonitoringSWTTeam3
 
             }
 
-            CalculateCompassCourse(WithDataAircrafts);
+            CalculateCompassCourse(WithoutDataAircrafts);
             HorizontalVelocity(WithoutDataAircrafts);
             WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
 
@@ -100,7 +100,7 @@ namespace AirTrafficMonitoringSWTTeam3
                         else
                         {
                             WithoutDataaircraft.CompassCourse =
-                               Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(xDifference / yDifference))));
+                               Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(xDifference / yDifference))/Math.PI*180));
 
                             if (xDifference > 0 && yDifference < 0)
                             {
