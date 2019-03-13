@@ -188,8 +188,6 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         }
 
 
-        [Test]
-       public void HorizontalVelocity()
        [Test]
        [TestCase("ATR423", 39045, 12932, 14000, "20151006213456789", "ATR423", 45000, 15940, 16000, "20151006214356895", 12.352)]
        [TestCase("SKF218",82000,21000,16300,"20191203213426980","SKF218",83000,19960,37000,"20191203214456990",2.2901)]
