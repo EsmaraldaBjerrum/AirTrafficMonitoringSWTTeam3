@@ -13,7 +13,7 @@ namespace AirTrafficMonitoringSWTTeam3
 
         public List<Aircraft> WithoutDataAircrafts;
         public List<Aircraft> WithDataAircrafts;
-      private double velocity;
+        private double velocity;
         public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
 
 

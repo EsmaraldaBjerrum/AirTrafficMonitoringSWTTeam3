@@ -39,7 +39,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.currentAircrafts.Count.Equals(1));
+            Assert.That(uut.WithoutDataAircrafts.Count.Equals(1));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.currentAircrafts[0].XCoordinate.Equals(85000));
+            Assert.That(uut.WithoutDataAircrafts[0].XCoordinate.Equals(85000));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.currentAircrafts[0].YCoordinate.Equals(75654));
+            Assert.That(uut.WithoutDataAircrafts[0].YCoordinate.Equals(75654));
         }
         [Test]
         public void AirspaceCorrectAltitude()
@@ -77,7 +77,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.currentAircrafts[0].Altitude.Equals(4000));
+            Assert.That(uut.WithoutDataAircrafts[0].Altitude.Equals(4000));
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.currentAircrafts[0].Timestamp.Equals(new DateTime(2015,10,06,21,34,56,789)));
+            Assert.That(uut.WithoutDataAircrafts[0].Timestamp.Equals(new DateTime(2015,10,06,21,34,56,789)));
         }
 
         [Test]
@@ -103,33 +103,31 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.currentAircrafts[0].Tag.Equals("XYZ987"));
+            Assert.That(uut.WithoutDataAircrafts[0].Tag.Equals("XYZ987"));
         }
 
 
+        //[Test]
+        //[TestCase(5,7)]
+        //[TestCase(0,4)]
+        //[TestCase(9,0)]
+        //[TestCase(0,4)]
+        //public void CalculateCompassCourse_ZCurrentAircraft_QNewAircraft_ResultsInQCurrentAircrafts(int Z, int Q)
+        //{
+        //    for (int i = 0; i < Z; i++)
+        //    {
+        //        uut.WithDataAircrafts.Add(new Aircraft("AAAAAA", i, i, i, DateTime.Now));
+        //    }
+        //    List<Aircraft> newAircraft = new List<Aircraft>();
+        //    for (int i = 0; i < Q; i++)
+        //    {
+        //        newAircraft.Add(new Aircraft("BBBBBB", i, i, i, DateTime.Now));
+        //    }
 
+        //    uut.CalculateCompassCourse(newAircraft);
 
-        [Test]
-        [TestCase(5,7)]
-        [TestCase(0,4)]
-        [TestCase(9,0)]
-        [TestCase(0,4)]
-        public void CalculateCompassCourse_ZCurrentAircraft_QNewAircraft_ResultsInQCurrentAircrafts(int Z, int Q)
-        {
-            for (int i = 0; i < Z; i++)
-            {
-                uut.currentAircrafts.Add(new Aircraft("AAAAAA", i, i, i, DateTime.Now));
-            }
-            List<Aircraft> newAircraft = new List<Aircraft>();
-            for (int i = 0; i < Q; i++)
-            {
-                newAircraft.Add(new Aircraft("BBBBBB", i, i, i, DateTime.Now));
-            }
-
-            uut.CalculateCompassCourse(newAircraft);
-
-            Assert.That(uut.currentAircrafts.Count, Is.EqualTo(Q));
-        }
+        //    Assert.That(uut.WithoutDataAircrafts.Count, Is.EqualTo(Q));
+        //}
 
 
 
@@ -140,14 +138,14 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("DAA111", 60000, 10000, 1000, "DAA111", 50000, 10000, 1000, 270)]
         public void CalculateCompassCourse_AircraftTravelingNorthSouthEastWest(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.currentAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
             List<Aircraft> newAircraft = new List<Aircraft>();
             newAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
             uut.CalculateCompassCourse(newAircraft);
 
-            Assert.That(uut.currentAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(newAircraft[0].CompassCourse, Is.EqualTo(course1));
         }
 
 
@@ -159,14 +157,14 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("EAA111", 5000, 10000, 1000, "EAA111", 85000, 10001, 1000, 90)]
         public void CalculateCompassCourse_AircraftTravelingBetweenNorthAndEast(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.currentAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
             List<Aircraft> newAircraft = new List<Aircraft>();
             newAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
             uut.CalculateCompassCourse(newAircraft);
 
-            Assert.That(uut.currentAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(newAircraft[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -177,14 +175,14 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("EAA111", 5000, 10000, 1000, "EAA111", 85000, 10001, 1000, 90)]
         public void CalculateCompassCourse_AircraftTravelingBetweenEastAndSouth(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.currentAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
             List<Aircraft> newAircraft = new List<Aircraft>();
             newAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
             uut.CalculateCompassCourse(newAircraft);
 
-            Assert.That(uut.currentAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(newAircraft[0].CompassCourse, Is.EqualTo(course1));
         }
 
 
