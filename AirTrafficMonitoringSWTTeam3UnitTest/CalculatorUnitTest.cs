@@ -190,29 +190,22 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
         [Test]
        public void HorizontalVelocity()
+       [Test]
+       [TestCase("ATR423", 39045, 12932, 14000, "20151006213456789", "ATR423", 45000, 15940, 16000, "20151006214356895", 12.352)]
+       [TestCase("SKF218",82000,21000,16300,"20191203213426980","SKF218",83000,19960,37000,"20191203214456990",2.2901)]
+       [TestCase("EDB239", 10000, 60000, 1000, "20191203214726980", "EDB239", 20000, 80000, 1000, "20191203215356990", 57.334)]
+      public void HorizontalVelocity(string t1, int x1, int y1, int a1, string ts1, string t2, int x2, int y2, int a2, string ts2, double velocity1)
        {
+         uut.currentAircrafts.Add(new Aircraft(t1,x1,y1,a1, (DateTime.ParseExact(ts1, "yyyyMMddHHmmssfff",
+            System.Globalization.CultureInfo.InvariantCulture))));
+
           List<Aircraft> testAircraftsList = new List<Aircraft>();
+          testAircraftsList.Add(new Aircraft(t2,x2,y2,a2, (DateTime.ParseExact(ts2, "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture))));
          
-          testAircraftsList.Add(new Aircraft("ATR423",39045,12932,14000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture))));
-         testAircraftsList.Add(new Aircraft("BCD123", 10005, 85890, 12000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture)))); 
-          testAircraftsList.Add(new Aircraft("XYZ987", 25059, 75654, 4000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture))));
+          uut.HorizontalVelocity(testAircraftsList);
 
-          List<Aircraft> newtestAircraftsList = new List<Aircraft>();
-          newtestAircraftsList.Add(new Aircraft("ATR423", 45000, 15940, 16000, (DateTime.ParseExact("20151006214356895", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture))));
-          newtestAircraftsList.Add(new Aircraft("ACD123", 10005, 85890, 12000, (DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture))));
-          newtestAircraftsList.Add(new Aircraft("XYZ987", 30000, 80654, 8000, (DateTime.ParseExact("20151006214518566", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture))));
-
-          uut.currentAircrafts = testAircraftsList;
-
-          uut.HorizontalVelocity(newtestAircraftsList);
-
-          Assert.That(newtestAircraftsList[0].HorizontalVelocity, Is.EqualTo(12.352).Within(00.001));
+          Assert.That(uut.currentAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.001));
        }
    }
 
