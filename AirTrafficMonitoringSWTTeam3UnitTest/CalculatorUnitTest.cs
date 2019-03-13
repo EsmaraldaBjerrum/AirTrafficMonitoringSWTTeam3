@@ -39,7 +39,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithoutDataAircrafts.Count.Equals(1));
+            Assert.That(uut.WithDataAircrafts.Count.Equals(1));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithoutDataAircrafts[0].XCoordinate.Equals(85000));
+            Assert.That(uut.WithDataAircrafts[0].XCoordinate.Equals(85000));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithoutDataAircrafts[0].YCoordinate.Equals(75654));
+            Assert.That(uut.WithDataAircrafts[0].YCoordinate.Equals(75654));
         }
         [Test]
         public void AirspaceCorrectAltitude()
@@ -77,7 +77,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithoutDataAircrafts[0].Altitude.Equals(4000));
+            Assert.That(uut.WithDataAircrafts[0].Altitude.Equals(4000));
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithoutDataAircrafts[0].Timestamp.Equals(new DateTime(2015,10,06,21,34,56,789)));
+            Assert.That(uut.WithDataAircrafts[0].Timestamp.Equals(new DateTime(2015,10,06,21,34,56,789)));
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithoutDataAircrafts[0].Tag.Equals("XYZ987"));
+            Assert.That(uut.WithDataAircrafts[0].Tag.Equals("XYZ987"));
         }
 
 
@@ -159,12 +159,12 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         {
             uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            List<Aircraft> newAircraft = new List<Aircraft>();
-            newAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            // List<Aircraft> newAircraft = new List<Aircraft>();}}
+            uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            uut.CalculateCompassCourse(newAircraft);
+            uut.CalculateCompassCourse(uut.WithoutDataAircrafts);
 
-            Assert.That(newAircraft[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -200,7 +200,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          
           uut.HorizontalVelocity(uut.WithoutDataAircrafts);
 
-          Assert.That(uut.WithDataAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.001));
+          Assert.That(uut.WithoutDataAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.01));
        }
    }
 
