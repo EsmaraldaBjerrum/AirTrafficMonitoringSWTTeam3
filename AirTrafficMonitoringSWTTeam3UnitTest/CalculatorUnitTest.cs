@@ -39,7 +39,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithoutDataAircrafts.Count.Equals(1));
+            Assert.That(uut.WithDataAircrafts.Count.Equals(1));
         }
 
         [Test]
