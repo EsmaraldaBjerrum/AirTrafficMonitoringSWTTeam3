@@ -14,9 +14,11 @@ namespace AirTrafficMonitoringSWTTeam3
             {
                 for (int i = 0; i < currentAircrafts.Count; i++)
                 {
-                    if (aircarft.Tag == )
+                   // if (aircarft.Tag == )
                 }
             }
+
+            return false;
         }
     }
 }

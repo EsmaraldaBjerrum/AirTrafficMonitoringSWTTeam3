@@ -95,7 +95,7 @@ namespace AirTrafficMonitoringSWTTeam3
                         else
                         {
                             aircraft.CompassCourse =
-                               Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(xDifference / yDifference))));
+                               Convert.ToInt32(Math.Round((Math.Atan(Math.Abs(xDifference / yDifference))/(Math.PI)*180)));
 
                             if (xDifference > 0 && yDifference < 0)
                             {
