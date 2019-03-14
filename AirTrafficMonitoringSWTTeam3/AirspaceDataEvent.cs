@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
-    public partial class Calculator
-    {
+    
         public class AirspaceDataEventArgs : EventArgs
         {
             public AirspaceDataEventArgs(List<Aircraft> transponderData)
@@ -13,5 +12,5 @@ namespace AirTrafficMonitoringSWTTeam3
             }
             public List<Aircraft> TransponderData { get; }
         }
-    }
+    
 }

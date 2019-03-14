@@ -52,10 +52,10 @@ namespace AirTrafficMonitoringSWTTeam3
             WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
 
 
-            foreach (Aircraft track in WithDataAircrafts)
-            {
-                Console.WriteLine(track.Tag + " " + track.XCoordinate + " " + track.YCoordinate + " " + track.CompassCourse + " " + track.Timestamp + " " + track.HorizontalVelocity );
-            }
+            //foreach (Aircraft track in WithDataAircrafts)
+            //{
+            //    Console.WriteLine(track.Tag + " " + track.XCoordinate + " " + track.YCoordinate + " " + track.CompassCourse + " " + track.Timestamp + " " + track.HorizontalVelocity );
+            //}
             WithoutDataAircrafts.Clear();
 
             AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));

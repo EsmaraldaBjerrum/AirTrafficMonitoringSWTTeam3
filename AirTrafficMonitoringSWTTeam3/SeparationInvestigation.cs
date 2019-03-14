@@ -4,21 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace AirTrafficMonitoringSWTTeam3
 {
     class SeparationInvestigation
     {
-        public bool Separation(List<Aircraft> currentAircrafts)
+        private Calculator _calculator;
+
+        public SeparationInvestigation(Calculator calculator)
         {
-            foreach (Aircraft aircarft in currentAircrafts)
+            _calculator = calculator;
+            _calculator.AirspaceDataEvent += Separation;
+        }
+
+        public void Separation(object sender, AirspaceDataEventArgs e)
+        {
+            foreach (Aircraft aircarft in e.TransponderData)
             {
-                for (int i = 0; i < currentAircrafts.Count; i++)
+                for (int i = 0; i < e.TransponderData.Count; i++)
                 {
-                   // if (aircarft.Tag == )
+                   
                 }
             }
 
-            return false;
+            
         }
     }
 }
