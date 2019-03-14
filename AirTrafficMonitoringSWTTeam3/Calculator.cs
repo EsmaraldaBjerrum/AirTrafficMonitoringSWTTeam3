@@ -99,21 +99,30 @@ namespace AirTrafficMonitoringSWTTeam3
 
                         else
                         {
+                            if(xDifference > 0 && yDifference > 0)
+                            { 
                             WithoutDataaircraft.CompassCourse =
                                Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(xDifference / yDifference))/Math.PI*180));
+                            }
 
                             if (xDifference > 0 && yDifference < 0)
                             {
+                                WithoutDataaircraft.CompassCourse =
+                                    Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(yDifference / xDifference)) / Math.PI * 180));
                                 WithoutDataaircraft.CompassCourse += 90;
                             }
 
                             if (xDifference < 0 && yDifference < 0)
                             {
+                                WithoutDataaircraft.CompassCourse =
+                                    Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(xDifference / yDifference)) / Math.PI * 180));
                                 WithoutDataaircraft.CompassCourse += 180;
                             }
 
                             if (xDifference < 0 && yDifference > 0)
                             {
+                                WithoutDataaircraft.CompassCourse =
+                                    Convert.ToInt32(Math.Round(Math.Atan(Math.Abs(yDifference / xDifference)) / Math.PI * 180));
                                 WithoutDataaircraft.CompassCourse += 270;
                             }
                         }
