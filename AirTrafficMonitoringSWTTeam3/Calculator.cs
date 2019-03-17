@@ -10,12 +10,13 @@ namespace AirTrafficMonitoringSWTTeam3
     public partial class Calculator
     {
         private ITransponderReceiver _transponderReceiver;
+       private Print _print;
 
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
         public List<Aircraft> WithDataAircrafts = new List<Aircraft>();
         private double velocity;
         public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
-
+       
 
 
         public Calculator(ITransponderReceiver transponderReceiver)
@@ -51,11 +52,8 @@ namespace AirTrafficMonitoringSWTTeam3
             HorizontalVelocity(WithoutDataAircrafts);
             WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
 
-
-            //foreach (Aircraft track in WithDataAircrafts)
-            //{
-            //    Console.WriteLine(track.Tag + " " + track.XCoordinate + " " + track.YCoordinate + " " + track.CompassCourse + " " + track.Timestamp + " " + track.HorizontalVelocity );
-            //}
+         _print.PrintOnScreen(WithDataAircrafts);
+            
             WithoutDataAircrafts.Clear();
 
             AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
