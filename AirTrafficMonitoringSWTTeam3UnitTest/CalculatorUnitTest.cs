@@ -106,7 +106,24 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             Assert.That(uut.WithDataAircrafts[0].Tag.Equals("XYZ987"));
         }
 
-        
+        private SeparationInvestigation _separationInvestigation;
+        [Test]
+        public void AirspaceCallsSeparationInvestigation()
+        {
+            _separationInvestigation = Substitute.For<SeparationInvestigation>();
+
+            List<string> testData = new List<string>();
+            testData.Add("XYZ987;85000;75654;4000;20151006213456789");
+
+            // Act: Trigger the fake object to execute event invocation
+            _fakeTransponderReceiver.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
+
+            //Hvordan skal jeg teste at separation bliver kaldt?
+
+        }
+
+
         [Test]
         [TestCase("AAA111", 10000, 10000, 1000, "AAA111", 10000, 40000, 1000, 0)]
         [TestCase("BAA111", 10000, 60000, 1000, "BAA111", 10000, 40000, 1000, 180)]

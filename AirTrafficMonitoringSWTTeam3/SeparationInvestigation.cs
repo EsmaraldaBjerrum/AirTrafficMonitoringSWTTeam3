@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
-    class SeparationInvestigation
+    public class SeparationInvestigation
     {
         private Calculator _calculator;
 
