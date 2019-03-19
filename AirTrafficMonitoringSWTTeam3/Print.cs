@@ -9,6 +9,7 @@ namespace AirTrafficMonitoringSWTTeam3
 {
    public class Print
    {
+      public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
       public void PrintOnScreen(List<Aircraft>WithDataAircrafts)
       {
@@ -18,40 +19,28 @@ namespace AirTrafficMonitoringSWTTeam3
          }
       }
 
-      public void PrintSeparationToFile(List<Aircraft> SeparationList)
+      public void PrintSeparationToFile(object sender, SeparationWarningDataEvent e)
       {
-         foreach (Aircraft separations in SeparationList)
+         foreach (var data in e.TransponderData )
          {
-            using (StreamReader sr =
-               new StreamReader(
-                  "C:\\Users\\Lenovo\\source\\repos\\EsmaraldaBjerrum\\AirTrafficMonitoringSWTTeam3\\SeparationLog.txt"))
+            using (StreamWriter fileWriter =
+               new FileInfo(
+                     "C:\\Users\\Lenovo\\source\\repos\\EsmaraldaBjerrum\\AirTrafficMonitoringSWTTeam3\\SeparationLog.txt")
+                  .AppendText())
             {
-               string content = sr.ReadToEnd();
-               if (content.Contains(separations.Tag))
-               {
-
-               }
-               else
-               {
-                  using (StreamWriter fileWriter =
-                     new FileInfo(
-                           "C:\\Users\\Lenovo\\source\\repos\\EsmaraldaBjerrum\\AirTrafficMonitoringSWTTeam3\\SeparationLog.txt")
-                        .AppendText())
-                  {
-                     fileWriter.WriteLine("Separation condition between "+separations.Tag+ "and "+separations.Tag+ " at "+separations.Timestamp);
-                  }
-               }
-
-
+               fileWriter.WriteLine("Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp);
             }
          }
       }
 
-      public void PrintSeparationOnScreen(List<Aircraft> SeparationList)
+     
+      public void PrintSeparationOnScreen(object sender, SeparationWarningDataEvent e)
       {
-         foreach (Aircraft separations in SeparationList)
+         foreach (var data in e.TransponderData)
          {
-            Console.WriteLine("Separation condition between " + separations.Tag + "and " + separations.Tag + " at " + separations.Timestamp);
+            
+               Console.WriteLine("Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp);
+            
          }
       }
    }
