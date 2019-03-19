@@ -10,7 +10,7 @@ namespace AirTrafficMonitoringSWTTeam3
     public partial class Calculator
     {
         private ITransponderReceiver _transponderReceiver;
-       private Print _print;
+       private Formatting _formatting;
 
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
         public List<Aircraft> WithDataAircrafts = new List<Aircraft>();
@@ -49,7 +49,7 @@ namespace AirTrafficMonitoringSWTTeam3
                     HorizontalVelocity(WithoutDataAircrafts);
                     WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
 
-                    //_print.PrintOnScreen(WithDataAircrafts);
+                    //_formatting.StringToPrintTracksOnScreen(WithDataAircrafts);
 
                     WithoutDataAircrafts.Clear();
 

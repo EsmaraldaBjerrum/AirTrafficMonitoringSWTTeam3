@@ -14,14 +14,12 @@ namespace AirTrafficMonitoringSWTTeam3
       private List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
       public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent; 
 
-        public SeparationInvestigation()
-        {
-        }
-
+       
         public SeparationInvestigation(Calculator calculator)
         {
             _calculator = calculator;
             _calculator.AirspaceDataEvent += Separation;
+
         }
 
       public void Separation(object sender, AirspaceDataEventArgs e)
