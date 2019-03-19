@@ -12,6 +12,7 @@ namespace AirTrafficMonitoringSWTTeam3
         private ITransponderReceiver _transponderReceiver;
        private Formatting _formatting;
 
+       private SeparationInvestigation _separationInvestigation;
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
         public List<Aircraft> WithDataAircrafts = new List<Aircraft>();
         private double velocity;
@@ -22,8 +23,11 @@ namespace AirTrafficMonitoringSWTTeam3
 
         public Calculator(ITransponderReceiver transponderReceiver)
         {
-            _print = new Print();
+
+           _separationInvestigation = new SeparationInvestigation(this);
+            _formatting = new Formatting(_separationInvestigation);
             
+
             _transponderReceiver = transponderReceiver;
 
             _transponderReceiver.TransponderDataReady += Control;
@@ -39,8 +43,8 @@ namespace AirTrafficMonitoringSWTTeam3
                 HorizontalVelocity(WithoutDataAircrafts);
                 WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
 
-                _print.PrintOnScreen(WithDataAircrafts);
-
+               _formatting.StringToPrintTracksOnScreen(WithDataAircrafts);
+               
                 AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
 
                 WithoutDataAircrafts.Clear();
