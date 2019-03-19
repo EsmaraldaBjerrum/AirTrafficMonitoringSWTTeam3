@@ -155,11 +155,7 @@ namespace AirTrafficMonitoringSWTTeam3
                     WithoutDataaircraft.HorizontalVelocity = Math.Round(velocity,2);
                 }
             }
-
-             
             
-
-          
         }
     }
 }
