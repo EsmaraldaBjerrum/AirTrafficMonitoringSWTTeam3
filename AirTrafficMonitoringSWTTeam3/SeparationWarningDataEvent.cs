@@ -8,8 +8,10 @@ namespace AirTrafficMonitoringSWTTeam3
 {
     public class SeparationWarningDataEvent : EventArgs
     {
-        public SeparationWarningDataEvent()
+       public List<SeparationWarningData> TransponderData { get; }
+        public SeparationWarningDataEvent(List<SeparationWarningData> transponderData)
         {
+           TransponderData = transponderData;
         }
     }
 }
