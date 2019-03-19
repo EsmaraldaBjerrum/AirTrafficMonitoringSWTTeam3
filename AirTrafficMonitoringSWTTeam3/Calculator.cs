@@ -44,19 +44,21 @@ namespace AirTrafficMonitoringSWTTeam3
                             System.Globalization.CultureInfo.InvariantCulture));
 
                     WithoutDataAircrafts.Add(aircraft);
+
+                    CalculateCompassCourse(WithoutDataAircrafts);
+                    HorizontalVelocity(WithoutDataAircrafts);
+                    WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
+
+                    //_print.PrintOnScreen(WithDataAircrafts);
+
+                    WithoutDataAircrafts.Clear();
+
+                    AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
                 }
 
             }
 
-            CalculateCompassCourse(WithoutDataAircrafts);
-            HorizontalVelocity(WithoutDataAircrafts);
-            WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
-
-         _print.PrintOnScreen(WithDataAircrafts);
             
-            WithoutDataAircrafts.Clear();
-
-            AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
         }
 
 

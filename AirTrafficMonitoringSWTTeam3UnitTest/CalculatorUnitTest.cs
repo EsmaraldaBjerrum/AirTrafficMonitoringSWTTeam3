@@ -7,6 +7,8 @@ using NUnit.Framework;
 using AirTrafficMonitoringSWTTeam3;
 using TransponderReceiver;
 using NSubstitute;
+using NSubstitute.Core;
+using NSubstitute.ReceivedExtensions;
 
 namespace AirTrafficMonitoringSWTTeam3UnitTest
 {
@@ -107,19 +109,25 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         }
 
         private SeparationInvestigation _separationInvestigation;
+        private AirspaceDataEventArgs _airspaceEvent;
         [Test]
         public void AirspaceCallsSeparationInvestigation()
         {
             _separationInvestigation = Substitute.For<SeparationInvestigation>();
+            uut.AirspaceDataEvent += _separationInvestigation.Separation;
+            
 
             List<string> testData = new List<string>();
-            testData.Add("XYZ987;85000;75654;4000;20151006213456789");
+            testData.Add("XYZ987;84000;75654;4000;20151006213456789");
+            testData.Add("XYT987;84000;78654;4000;20151006213456789");
 
             // Act: Trigger the fake object to execute event invocation
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            //Hvordan skal jeg teste at separation bliver kaldt?
+            
+            _separationInvestigation.Received(1).Separation(this, new AirspaceDataEventArgs(uut.WithDataAircrafts));
+
 
         }
 

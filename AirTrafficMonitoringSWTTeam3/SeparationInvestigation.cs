@@ -11,6 +11,10 @@ namespace AirTrafficMonitoringSWTTeam3
     {
         private Calculator _calculator;
 
+        public SeparationInvestigation()
+        {
+        }
+
         public SeparationInvestigation(Calculator calculator)
         {
             _calculator = calculator;
