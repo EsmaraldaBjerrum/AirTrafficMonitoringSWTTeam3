@@ -43,5 +43,10 @@ namespace AirTrafficMonitoringSWTTeam3
 
             
         }
+
+        public void SeparationController()
+        {
+
+        }
     }
 }

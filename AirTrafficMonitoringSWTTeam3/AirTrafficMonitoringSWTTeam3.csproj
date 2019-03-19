@@ -52,6 +52,7 @@
     <Compile Include="Print.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeparationWarningData.cs" />
     <Compile Include="SeparationWarningDataEvent.cs" />
     <Compile Include="SeparationInvestigation.cs" />
   </ItemGroup>
