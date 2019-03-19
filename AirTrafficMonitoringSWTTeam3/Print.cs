@@ -9,8 +9,7 @@ namespace AirTrafficMonitoringSWTTeam3
 {
    public class Print
    {
-      public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
-
+    
       public void PrintOnScreen(List<Aircraft>WithDataAircrafts)
       {
          foreach (Aircraft track in WithDataAircrafts)
@@ -38,9 +37,7 @@ namespace AirTrafficMonitoringSWTTeam3
       {
          foreach (var data in e.TransponderData)
          {
-            
-               Console.WriteLine("Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp);
-            
+            Console.WriteLine("Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp);
          }
       }
    }
