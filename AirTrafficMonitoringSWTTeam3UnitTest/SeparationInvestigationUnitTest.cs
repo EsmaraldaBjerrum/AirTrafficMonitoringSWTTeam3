@@ -28,5 +28,11 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             
 
         }
+
+        [Test]
+        public void AddSeparation()
+        {
+
+        }
     }
 }

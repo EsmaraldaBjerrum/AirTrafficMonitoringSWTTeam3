@@ -10,8 +10,8 @@ namespace AirTrafficMonitoringSWTTeam3
     public partial class Calculator
     {
         private ITransponderReceiver _transponderReceiver;
-       private Formatting _formatting;
-        private Print _print;
+       private Formatting_Tracks _formatting;
+        private LogToScreen _print;
 
        private SeparationInvestigation _separationInvestigation;
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
@@ -20,13 +20,12 @@ namespace AirTrafficMonitoringSWTTeam3
         public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
         private bool _newData = false;
        
-
-
+      
         public Calculator(ITransponderReceiver transponderReceiver)
         {
 
            _separationInvestigation = new SeparationInvestigation(this);
-            _formatting = new Formatting(_separationInvestigation);
+            _formatting = new Formatting_Tracks(_separationInvestigation);
             
 
             _transponderReceiver = transponderReceiver;

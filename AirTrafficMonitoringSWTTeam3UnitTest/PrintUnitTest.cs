@@ -13,20 +13,20 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
    [TestFixture]
    public class PrintUnitTest
    {
-      private Print uut;
+      private LogToScreen uut;
 
       [SetUp]
       public void SetUp()
       {
-         uut = new Print();
+         uut = new LogToScreen();
       }
 
       public void PrintSeparationToFile_Succes()
       {
          string test = "Esmaralda er en giraf og Louise er en søløve";
-         uut.PrintSeparationToFile(test);
+         uut.Log(test);
 
-         FileStream input = new FileStream("C:\\Users\\Lenovo\\source\\repos\\EsmaraldaBjerrum\\AirTrafficMonitoringSWTTeam3\\SeparationLog.txt",FileMode.Open,FileAccess.Read);
+         FileStream input = new FileStream("SeparationLog.txt",FileMode.Open,FileAccess.Read);
          StreamReader fileReader = new StreamReader(input);
 
          string FileString = fileReader.ReadLine();
