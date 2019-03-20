@@ -221,7 +221,8 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
 
         [Test]
-       [TestCase("ATR423", 39045, 12932, 14000, "20151006213456789", "ATR423", 45000, 15940, 16000, "20151006214356895", 12.352)]
+       [TestCase("Test1", 2000, 1000, 6000, "20151006213456789", "Test2", 5000, 5000, 6000, "20151006213458789",2500)]
+      [TestCase("ATR423", 39045, 12932, 14000, "20151006213456789", "ATR423", 45000, 15940, 16000, "20151006214356895", 12.352)]
        [TestCase("SKF218",82000,21000,16300,"20191203213426980","SKF218",83000,19960,37000,"20191203214456990",2.2901)]
        [TestCase("EDB239", 10000, 60000, 1000, "20191203214726980", "EDB239", 20000, 80000, 1000, "20191203215356990", 57.334)]
       public void HorizontalVelocity(string t1, int x1, int y1, int a1, string ts1, string t2, int x2, int y2, int a2, string ts2, double velocity1)
@@ -236,6 +237,8 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
           Assert.That(uut.WithoutDataAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.01));
        }
+
+       
    }
 
 }

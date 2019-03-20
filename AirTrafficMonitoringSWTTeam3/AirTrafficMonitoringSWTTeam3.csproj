@@ -49,8 +49,11 @@
     <Compile Include="Aircraft.cs" />
     <Compile Include="AirspaceDataEvent.cs" />
     <Compile Include="Calculator.cs" />
-    <Compile Include="Formatting.cs" />
-    <Compile Include="Print.cs" />
+    <Compile Include="Formatting_Separation.cs" />
+    <Compile Include="Formatting_Tracks.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="LogToLog.cs" />
+    <Compile Include="LogToScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationWarningData.cs" />
