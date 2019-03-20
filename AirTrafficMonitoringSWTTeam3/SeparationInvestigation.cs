@@ -18,6 +18,7 @@ namespace AirTrafficMonitoringSWTTeam3
         {
             _calculator = calculator;
             _calculator.AirspaceDataEvent += Separation;
+
         }
 
       public void Separation(object sender, AirspaceDataEventArgs e)

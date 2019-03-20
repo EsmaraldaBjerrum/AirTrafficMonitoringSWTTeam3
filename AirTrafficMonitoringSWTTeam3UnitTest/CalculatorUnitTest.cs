@@ -124,11 +124,9 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             // Act: Trigger the fake object to execute event invocation
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
-
             
             _separationInvestigation.Received(1).Separation(this, new AirspaceDataEventArgs(uut.WithDataAircrafts));
-
-
+            
         }
 
 

@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculatorUnitTest.cs" />
+    <Compile Include="FormattingUnitTest.cs" />
+    <Compile Include="PrintUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationInvestigationUnitTest.cs" />
   </ItemGroup>

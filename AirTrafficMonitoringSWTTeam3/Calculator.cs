@@ -10,27 +10,51 @@ namespace AirTrafficMonitoringSWTTeam3
     public partial class Calculator
     {
         private ITransponderReceiver _transponderReceiver;
+       private Formatting _formatting;
         private Print _print;
 
+       private SeparationInvestigation _separationInvestigation;
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
         public List<Aircraft> WithDataAircrafts = new List<Aircraft>();
         private double velocity;
         public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
+        private bool _newData = false;
        
 
 
         public Calculator(ITransponderReceiver transponderReceiver)
-      {
-            
-            _transponderReceiver = transponderReceiver;
-
-            _transponderReceiver.TransponderDataReady += AirSpace;
-        }
-
-        public void AirSpace(object sender, RawTransponderDataEventArgs e)
         {
 
-            foreach (var data in e.TransponderData)
+           _separationInvestigation = new SeparationInvestigation(this);
+            _formatting = new Formatting(_separationInvestigation);
+            
+
+            _transponderReceiver = transponderReceiver;
+
+            _transponderReceiver.TransponderDataReady += Control;
+        }
+
+        public void Control(object sender, RawTransponderDataEventArgs e)
+        {
+            AirSpace(e.TransponderData);
+
+            if (WithoutDataAircrafts.Count != 0)
+            {
+                CalculateCompassCourse(WithoutDataAircrafts);
+                HorizontalVelocity(WithoutDataAircrafts);
+                WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
+
+               _formatting.StringToPrintTracksOnScreen(WithDataAircrafts);
+               
+                AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
+
+                WithoutDataAircrafts.Clear();
+            }
+        }
+
+        public void AirSpace(List<string> newAircrafts)
+        {
+            foreach (var data in newAircrafts)
             {
                 string[] aircraftdata = new string[5];
                 aircraftdata = data.Split(';');
@@ -44,21 +68,8 @@ namespace AirTrafficMonitoringSWTTeam3
                             System.Globalization.CultureInfo.InvariantCulture));
 
                     WithoutDataAircrafts.Add(aircraft);
-
-                    CalculateCompassCourse(WithoutDataAircrafts);
-                    HorizontalVelocity(WithoutDataAircrafts);
-                    WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
-
-                    //_print.PrintOnScreen(WithDataAircrafts);
-
-                    WithoutDataAircrafts.Clear();
-
-                    AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
                 }
-
             }
-
-            
         }
 
 
@@ -126,11 +137,9 @@ namespace AirTrafficMonitoringSWTTeam3
                                 WithoutDataaircraft.CompassCourse += 270;
                             }
                         }
-                    }
+                    } 
                 }
             }
-
-            
         }
 
         public void HorizontalVelocity(List<Aircraft> WithoutDataaircrafts)
@@ -151,7 +160,6 @@ namespace AirTrafficMonitoringSWTTeam3
 
                         velocity = distance / interval;
                     }
-
                     WithoutDataaircraft.HorizontalVelocity = Math.Round(velocity,2);
                 }
             }
