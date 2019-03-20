@@ -13,8 +13,10 @@ namespace AirTrafficMonitoringSWTTeam3
         static void Main(string[] args)
         {
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
+            
+            SeparationInvestigation _separationInvestigation = new SeparationInvestigation();
 
-            var system = new Calculator(receiver);
+        
 
             while (true)
             {

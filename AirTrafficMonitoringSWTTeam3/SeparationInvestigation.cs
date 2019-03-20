@@ -21,9 +21,7 @@ namespace AirTrafficMonitoringSWTTeam3
 
         }
 
-        public SeparationInvestigation()
-        {
-        }
+       
 
         public void Separation(object sender, AirspaceDataEventArgs e)
       {

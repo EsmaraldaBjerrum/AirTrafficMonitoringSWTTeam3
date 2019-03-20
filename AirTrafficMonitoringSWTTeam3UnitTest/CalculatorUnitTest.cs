@@ -113,7 +113,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [Test]
         public void AirspaceCallsSeparationInvestigation()
         {
-            _separationInvestigation = Substitute.For<SeparationInvestigation>();
+            _separationInvestigation = Substitute.For<SeparationInvestigation>(uut);
             uut.AirspaceDataEvent += _separationInvestigation.Separation;
             
 

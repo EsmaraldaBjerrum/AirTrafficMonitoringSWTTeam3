@@ -47,14 +47,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
-    <Compile Include="AirspaceDataEvent.cs" />
+    <Compile Include="Controler\Converter.cs" />
+    <Compile Include="Controler\Filter.cs" />
+    <Compile Include="Controler\IConverter.cs" />
+    <Compile Include="Controler\IFilter.cs" />
+    <Compile Include="Controler\IUpdated.cs" />
+    <Compile Include="Controler\Updated.cs" />
+    <Compile Include="Events\AirspaceDataEvent.cs" />
     <Compile Include="Calculator.cs" />
+    <Compile Include="Events\ConvertDataEvent.cs" />
+    <Compile Include="Events\FilterDataEvent.cs" />
+    <Compile Include="Events\UpdatedDataEvent.cs" />
     <Compile Include="Formatting.cs" />
     <Compile Include="Print.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationWarningData.cs" />
-    <Compile Include="SeparationWarningDataEvent.cs" />
+    <Compile Include="Events\SeparationWarningDataEvent.cs" />
     <Compile Include="SeparationInvestigation.cs" />
   </ItemGroup>
   <ItemGroup>
