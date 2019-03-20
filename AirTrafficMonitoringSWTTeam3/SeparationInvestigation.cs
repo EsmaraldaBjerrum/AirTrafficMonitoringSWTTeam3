@@ -36,7 +36,7 @@ namespace AirTrafficMonitoringSWTTeam3
 
                   if (verticalSeparation < 300 && horizontalSeparation < 5000)
                   {
-                      newSeparationWarningData.Add(new SeparationWarningData());
+                      //newSeparationWarningData.Add(new SeparationWarningData());
                      //Hvis separationen allerede er kaldt, så skal den ikke kaldes igen
                      //Oprettelse af lokal liste, der husker hvem, der er under separation
                   }
