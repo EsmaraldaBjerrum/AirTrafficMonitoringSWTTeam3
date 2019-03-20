@@ -22,7 +22,11 @@ namespace AirTrafficMonitoringSWTTeam3
 
         }
 
-      public void Separation(object sender, AirspaceDataEventArgs e)
+        public SeparationInvestigation()
+        {
+        }
+
+        public void Separation(object sender, AirspaceDataEventArgs e)
       {
          foreach (Aircraft aircraft in e.TransponderData)
          {
