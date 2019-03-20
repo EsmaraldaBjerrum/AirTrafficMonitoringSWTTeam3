@@ -11,6 +11,7 @@ namespace AirTrafficMonitoringSWTTeam3
     {
         private ITransponderReceiver _transponderReceiver;
        private Formatting _formatting;
+        private Print _print;
 
        private SeparationInvestigation _separationInvestigation;
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
@@ -71,9 +72,9 @@ namespace AirTrafficMonitoringSWTTeam3
         }
 
 
-        public void CalculateCompassCourse(List<Aircraft> WithoutDataaircrafts)
+        public void CalculateCompassCourse(List<Aircraft> WithoutDataAircrafts)
         {
-            foreach (Aircraft WithoutDataaircraft in WithoutDataaircrafts)
+            foreach (Aircraft WithoutDataaircraft in WithoutDataAircrafts)
             {
                 foreach (Aircraft WithDataAircraft in WithDataAircrafts)
                 {
