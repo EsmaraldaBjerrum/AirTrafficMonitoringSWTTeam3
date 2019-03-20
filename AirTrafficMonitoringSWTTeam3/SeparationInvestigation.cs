@@ -21,11 +21,7 @@ namespace AirTrafficMonitoringSWTTeam3
 
         }
 
-        public SeparationInvestigation()
-        {
-        }
-        public void RunSeparationInvestigation(object sender, AirspaceDataEventArgs e)
-        {
+       
 
             AddSeparations(e.TransponderData);
             SeparationController();
