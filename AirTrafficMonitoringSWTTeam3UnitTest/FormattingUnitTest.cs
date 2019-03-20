@@ -27,7 +27,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          _fakeCalculator = new Calculator(_fakeTransponderReceiver);
          _fakePrint = Substitute.For<LogToScreen>();
          _fakeSeparationInvestigation = Substitute.For<SeparationInvestigation>(_fakeCalculator);
-         uut = new Formatting_Tracks(_fakeSeparationInvestigation);
+         uut = new Formatting_Tracks();
         
       }
 
@@ -42,7 +42,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          
        uut.StringToPrintTracksOnScreen(fakeList);
 
-         _fakePrint.Received().PrintOnScreen("Tag: SKF Current position: X: 21 meters, Y: 8 meters, Current altitude: 1996 meters, Current horizontal velocity: 2019 m/s, Current compass course 180 degress");
+         _fakePrint.Received().Log("Tag: SKF Current position: X: 21 meters, Y: 8 meters, Current altitude: 1996 meters, Current horizontal velocity: 2019 m/s, Current compass course 180 degress");
        
       }
 
@@ -50,18 +50,19 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       public void SeparationOccur_Eventfired_StringReadyToFile()
       {
          List<SeparationWarningData> fakeList = new List<SeparationWarningData>();
-         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData();
-         fakeSeparationWarningData.AircraftTag1 = "SKF";
-         fakeSeparationWarningData.AircraftTag2 = "LBS";
-         fakeSeparationWarningData.SeparationTimeStamp = (DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
-            System.Globalization.CultureInfo.InvariantCulture));
+         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData("SKF", "LBS", (DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture)));
+         //fakeSeparationWarningData.AircraftTag1 = "SKF";
+         //fakeSeparationWarningData.AircraftTag2 = "LBS";
+         //fakeSeparationWarningData.SeparationTimeStamp = (DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
+           // System.Globalization.CultureInfo.InvariantCulture));
 
          fakeList.Add(fakeSeparationWarningData);
 
          _fakeSeparationInvestigation.SeparationWarningDataEvent +=
             Raise.EventWith(new SeparationWarningDataEvent(fakeList));
 
-         _fakePrint.Received().PrintSeparationToFile("RunSeparationInvestigation condition between SKF and LBS at 03-12-2019 21:34:26");
+         _fakePrint.Received().Log("RunSeparationInvestigation condition between SKF and LBS at 03-12-2019 21:34:26");
 
       }
 
@@ -69,18 +70,19 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       public void SeparationOccur_Eventfired_StringReadyToScreen()
       {
          List<SeparationWarningData> fakeList = new List<SeparationWarningData>();
-         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData();
-         fakeSeparationWarningData.AircraftTag1 = "SKF";
-         fakeSeparationWarningData.AircraftTag2 = "LBS";
-         fakeSeparationWarningData.SeparationTimeStamp = (DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
-            System.Globalization.CultureInfo.InvariantCulture));
+         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData("SKF", "LBS", DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
+             System.Globalization.CultureInfo.InvariantCulture));
+         //fakeSeparationWarningData.AircraftTag1 = "SKF";
+         //fakeSeparationWarningData.AircraftTag2 = "LBS";
+         //fakeSeparationWarningData.SeparationTimeStamp = (DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
+           // System.Globalization.CultureInfo.InvariantCulture));
 
          fakeList.Add(fakeSeparationWarningData);
 
          _fakeSeparationInvestigation.SeparationWarningDataEvent +=
             Raise.EventWith(new SeparationWarningDataEvent(fakeList));
 
-         _fakePrint.Received().PrintSeparationOnScreen("RunSeparationInvestigation condition between SKF and LBS at 03-12-2019 21:34:26");
+         _fakePrint.Received().Log("RunSeparationInvestigation condition between SKF and LBS at 03-12-2019 21:34:26");
 
       }
 
