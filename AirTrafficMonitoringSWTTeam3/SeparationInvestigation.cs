@@ -10,8 +10,8 @@ namespace AirTrafficMonitoringSWTTeam3
     public class SeparationInvestigation
     {
         private Calculator _calculator;
-        private List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
-        private List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
+        public List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
+        public List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
         public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
         public SeparationInvestigation(Calculator calculator)
@@ -50,7 +50,6 @@ namespace AirTrafficMonitoringSWTTeam3
 
                         if (verticalSeparation < 300 && horizontalSeparation < 5000)
                         {
-                            
                             newSeparationWarningData.Add(new SeparationWarningData(aircraft.Tag, comparingAircraft.Tag, aircraft.Timestamp));
                         }
                     }

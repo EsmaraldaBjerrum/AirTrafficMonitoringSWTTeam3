@@ -25,7 +25,7 @@ namespace AirTrafficMonitoringSWTTeam3
         {
 
            _separationInvestigation = new SeparationInvestigation(this);
-            _formatting = new Formatting_Tracks(_separationInvestigation);
+            _formatting = new Formatting_Tracks();
             
 
             _transponderReceiver = transponderReceiver;

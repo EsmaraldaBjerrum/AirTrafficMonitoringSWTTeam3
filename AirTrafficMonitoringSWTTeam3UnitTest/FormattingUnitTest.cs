@@ -27,7 +27,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          _fakeCalculator = new Calculator(_fakeTransponderReceiver);
          _fakePrint = Substitute.For<LogToScreen>();
          _fakeSeparationInvestigation = Substitute.For<SeparationInvestigation>(_fakeCalculator);
-        uut = new Formatting_Tracks(_fakeSeparationInvestigation);
+         uut = new Formatting_Tracks(_fakeSeparationInvestigation);
         
       }
 
