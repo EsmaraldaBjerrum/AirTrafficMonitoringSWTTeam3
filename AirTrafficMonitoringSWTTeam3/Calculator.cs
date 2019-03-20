@@ -20,8 +20,7 @@ namespace AirTrafficMonitoringSWTTeam3
         public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
         private bool _newData = false;
        
-
-
+      
         public Calculator(ITransponderReceiver transponderReceiver)
         {
 

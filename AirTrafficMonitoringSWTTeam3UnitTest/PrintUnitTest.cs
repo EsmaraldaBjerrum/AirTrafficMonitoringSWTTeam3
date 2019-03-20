@@ -26,7 +26,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          string test = "Esmaralda er en giraf og Louise er en søløve";
          uut.PrintSeparationToFile(test);
 
-         FileStream input = new FileStream("C:\\Users\\Lenovo\\source\\repos\\EsmaraldaBjerrum\\AirTrafficMonitoringSWTTeam3\\SeparationLog.txt",FileMode.Open,FileAccess.Read);
+         FileStream input = new FileStream("SeparationLog.txt",FileMode.Open,FileAccess.Read);
          StreamReader fileReader = new StreamReader(input);
 
          string FileString = fileReader.ReadLine();

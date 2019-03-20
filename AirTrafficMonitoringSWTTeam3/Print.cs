@@ -20,7 +20,7 @@ namespace AirTrafficMonitoringSWTTeam3
          
             using (StreamWriter fileWriter =
                new FileInfo(
-                     "C:\\Users\\Lenovo\\source\\repos\\EsmaraldaBjerrum\\AirTrafficMonitoringSWTTeam3\\SeparationLog.txt")
+                     "SeparationLog.txt")
                   .AppendText())
             {
                fileWriter.WriteLine(s);
