@@ -10,7 +10,7 @@ namespace AirTrafficMonitoringSWTTeam3
     public partial class Calculator
     {
         private ITransponderReceiver _transponderReceiver;
-       private Print _print;
+        private Print _print;
 
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
         public List<Aircraft> WithDataAircrafts = new List<Aircraft>();
@@ -62,9 +62,9 @@ namespace AirTrafficMonitoringSWTTeam3
         }
 
 
-        public void CalculateCompassCourse(List<Aircraft> WithoutDataaircrafts)
+        public void CalculateCompassCourse(List<Aircraft> WithoutDataAircrafts)
         {
-            foreach (Aircraft WithoutDataaircraft in WithoutDataaircrafts)
+            foreach (Aircraft WithoutDataaircraft in WithoutDataAircrafts)
             {
                 foreach (Aircraft WithDataAircraft in WithDataAircrafts)
                 {
@@ -155,11 +155,6 @@ namespace AirTrafficMonitoringSWTTeam3
                     WithoutDataaircraft.HorizontalVelocity = Math.Round(velocity,2);
                 }
             }
-
-             
-            
-
-          
         }
     }
 }
