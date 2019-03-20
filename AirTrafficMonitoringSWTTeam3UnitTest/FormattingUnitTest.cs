@@ -13,11 +13,11 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
    [TestFixture]
   public class FormattingUnitTest
    {
-      private Print _fakePrint;
+      private LogToScreen _fakePrint;
       private SeparationInvestigation _fakeSeparationInvestigation;
       private Calculator _fakeCalculator;
       private ITransponderReceiver _fakeTransponderReceiver;
-      private Formatting uut;
+      private Formatting_Tracks uut;
      
 
       [SetUp]
@@ -25,9 +25,9 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       {
          _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
          _fakeCalculator = new Calculator(_fakeTransponderReceiver);
-         _fakePrint = Substitute.For<Print>();
+         _fakePrint = Substitute.For<LogToScreen>();
          _fakeSeparationInvestigation = Substitute.For<SeparationInvestigation>(_fakeCalculator);
-        uut = new Formatting(_fakeSeparationInvestigation);
+        uut = new Formatting_Tracks(_fakeSeparationInvestigation);
         
       }
 

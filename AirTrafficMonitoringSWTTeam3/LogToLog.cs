@@ -7,18 +7,11 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
-   public class Print
+   public class LogToLog : ILog
    {
-    
-      public void PrintOnScreen(string s)
+      public void Log(string s)
       {
-         Console.WriteLine(s);
-      }
-
-      public void PrintSeparationToFile(string s)
-      {
-         
-            using (StreamWriter fileWriter =
+         using (StreamWriter fileWriter =
                new FileInfo(
                      "SeparationLog.txt")
                   .AppendText())
@@ -26,12 +19,6 @@ namespace AirTrafficMonitoringSWTTeam3
                fileWriter.WriteLine(s);
             }
          
-      }
-
-     
-      public void PrintSeparationOnScreen(string s)
-      {
-        Console.WriteLine(s);
       }
    }
 }

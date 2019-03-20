@@ -17,7 +17,7 @@ namespace AirTrafficMonitoringSWTTeam3
         public SeparationInvestigation(Calculator calculator)
         {
             _calculator = calculator;
-            _calculator.AirspaceDataEvent += Separation;
+            //_calculator.AirspaceDataEvent += Separation;
 
         }
 
@@ -25,33 +25,33 @@ namespace AirTrafficMonitoringSWTTeam3
         {
         }
 
-        public void Separation(object sender, AirspaceDataEventArgs e)
-      {
-         foreach (Aircraft aircraft in e.TransponderData)
-         {
-            foreach (Aircraft comparingAircraft in e.TransponderData)
-            {
-               if (aircraft.Tag != comparingAircraft.Tag)
-               {
-                  int verticalSeparation = Math.Abs(aircraft.Altitude - comparingAircraft.Altitude);
-                  double xDifference = Math.Abs(aircraft.XCoordinate - comparingAircraft.XCoordinate);
-                  double yDifference = Math.Abs(aircraft.YCoordinate - comparingAircraft.YCoordinate);
-                  double horizontalSeparation = Math.Sqrt(Math.Pow(xDifference, 2) + Math.Pow(yDifference, 2));
+        //public void Separation(object sender, AirspaceDataEventArgs e)
+      //{
+      //   foreach (Aircraft aircraft in e.TransponderData)
+      //   {
+      //      foreach (Aircraft comparingAircraft in e.TransponderData)
+      //      {
+      //         if (aircraft.Tag != comparingAircraft.Tag)
+      //         {
+      //            int verticalSeparation = Math.Abs(aircraft.Altitude - comparingAircraft.Altitude);
+      //            double xDifference = Math.Abs(aircraft.XCoordinate - comparingAircraft.XCoordinate);
+      //            double yDifference = Math.Abs(aircraft.YCoordinate - comparingAircraft.YCoordinate);
+      //            double horizontalSeparation = Math.Sqrt(Math.Pow(xDifference, 2) + Math.Pow(yDifference, 2));
 
-                  if (verticalSeparation < 300 && horizontalSeparation < 5000)
-                  {
-                      newSeparationWarningData.Add(new SeparationWarningData());
-                     //Hvis separationen allerede er kaldt, så skal den ikke kaldes igen
-                     //Oprettelse af lokal liste, der husker hvem, der er under separation
-                  }
-               }
+      //            if (verticalSeparation < 300 && horizontalSeparation < 5000)
+      //            {
+      //                newSeparationWarningData.Add(new SeparationWarningData());
+      //               //Hvis separationen allerede er kaldt, så skal den ikke kaldes igen
+      //               //Oprettelse af lokal liste, der husker hvem, der er under separation
+      //            }
+      //         }
 
-            }
+      //      }
 
-         }
+      //   }
 
 
-      }
+      //}
 
       public void SeparationController()
       {
@@ -67,7 +67,6 @@ namespace AirTrafficMonitoringSWTTeam3
                   newSeparationWarningData.Remove(newSeparationData);
                }
             }
-            
          }
          SeparationWarningDataEvent?.Invoke(this,(new SeparationWarningDataEvent(newSeparationWarningData)));
       }
