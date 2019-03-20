@@ -34,7 +34,7 @@ namespace AirTrafficMonitoringSWTTeam3
       {
          foreach (var data in e.TransponderData)
          {
-            string separationToFile = "Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
+            string separationToFile = "RunSeparationInvestigation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
             _print.PrintSeparationToFile(separationToFile);
          }
       }
@@ -43,7 +43,7 @@ namespace AirTrafficMonitoringSWTTeam3
       {
          foreach (var data in e.TransponderData)
          {
-            string separationTiScreen = "Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
+            string separationTiScreen = "RunSeparationInvestigation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
          }
 
       }

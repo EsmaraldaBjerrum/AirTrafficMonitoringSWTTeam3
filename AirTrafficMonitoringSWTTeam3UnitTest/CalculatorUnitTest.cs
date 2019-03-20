@@ -114,7 +114,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         public void AirspaceCallsSeparationInvestigation()
         {
             _separationInvestigation = Substitute.For<SeparationInvestigation>();
-            uut.AirspaceDataEvent += _separationInvestigation.Separation;
+            uut.AirspaceDataEvent += _separationInvestigation.RunSeparationInvestigation;
             
 
             List<string> testData = new List<string>();
@@ -125,7 +125,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
             
-            _separationInvestigation.Received(1).Separation(this, new AirspaceDataEventArgs(uut.WithDataAircrafts));
+            _separationInvestigation.Received(1).RunSeparationInvestigation(this, new AirspaceDataEventArgs(uut.WithDataAircrafts));
             
         }
 
