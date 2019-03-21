@@ -68,6 +68,8 @@ namespace AirTrafficMonitoringSWTTeam3
                     }
                 }
             }
+
+            oldSeparationWarningData = newSeparationWarningData;
         }
     }
 }
