@@ -12,8 +12,8 @@ namespace AirTrafficMonitoringSWTTeam3
     public class SeparationInvestigation
     {
         private IUpdater _updater;
-        private List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
-        private List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
+        public List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
+        public List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
         public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
         public SeparationInvestigation(IUpdater updater)
