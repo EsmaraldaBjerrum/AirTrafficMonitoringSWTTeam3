@@ -16,10 +16,10 @@ namespace AirTrafficMonitoringSWTTeam3
         private List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
         public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
-        public SeparationInvestigation(IUpdated updater)
+        public SeparationInvestigation(IUpdated updated)
         {
-            _updater = updater;
-            _updater.UpdatedDataEvent += RunSeparationInvestigation;
+            _updated = updated;
+            _updated.UpdatedDataEvent += RunSeparationInvestigation;
 
         }
 
@@ -28,9 +28,9 @@ namespace AirTrafficMonitoringSWTTeam3
             AddSeparations(e.UpdatedData);
             SeparationController();
 
-        //    if (newSeparationWarningData.Count != 0)
-        //        SeparationWarningDataEvent?.Invoke(this, (new SeparationWarningDataEvent(newSeparationWarningData)));
-        //}
+            if (newSeparationWarningData.Count != 0)
+                SeparationWarningDataEvent?.Invoke(this, (new SeparationWarningDataEvent(newSeparationWarningData)));
+        }
 
         public void AddSeparations(List<Aircraft> newAircrafts)
         {
