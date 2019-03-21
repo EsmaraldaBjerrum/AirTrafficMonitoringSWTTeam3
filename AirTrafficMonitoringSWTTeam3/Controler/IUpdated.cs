@@ -7,8 +7,9 @@ using AirTrafficMonitoringSWTTeam3.Events;
 
 namespace AirTrafficMonitoringSWTTeam3.Controler
 {
-    interface IUpdated
+    public interface IUpdated
     {
         event EventHandler<UpdatedDataEvent> UpdatedDataEvent;
+        
     }
 }

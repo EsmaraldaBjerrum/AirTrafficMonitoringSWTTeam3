@@ -58,8 +58,6 @@
     <Compile Include="Events\ConvertDataEvent.cs" />
     <Compile Include="Events\FilterDataEvent.cs" />
     <Compile Include="Events\UpdatedDataEvent.cs" />
-    <Compile Include="Formatting.cs" />
-    <Compile Include="Print.cs" />
     <Compile Include="Formatting_Separation.cs" />
     <Compile Include="Formatting_Tracks.cs" />
     <Compile Include="ILog.cs" />

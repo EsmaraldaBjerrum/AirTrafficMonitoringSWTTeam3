@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringSWTTeam3.Events
 {
-    class UpdatedDataEvent : EventArgs
+    public class UpdatedDataEvent : EventArgs
     {
         public UpdatedDataEvent(List<Aircraft> updatedData)
         {

@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitoringSWTTeam3.Controler;
+using AirTrafficMonitoringSWTTeam3.Events;
 
 
 namespace AirTrafficMonitoringSWTTeam3
 {
     public class SeparationInvestigation
     {
-        private Calculator _calculator;
+        private IUpdated _updater;
         public List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
         public List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
         public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
-        public SeparationInvestigation(Calculator calculator)
+        public SeparationInvestigation(IUpdated updater)
         {
-            _calculator = calculator;
-            _calculator.AirspaceDataEvent += RunSeparationInvestigation;
+            _updater = updater;
+            _updater.UpdatedDataEvent += RunSeparationInvestigation;
 
         }
 
-       
-
-            AddSeparations(e.TransponderData);
+        public void RunSeparationInvestigation(object sender, UpdatedDataEvent e)
+        {
+            AddSeparations(e.UpdatedData);
             SeparationController();
 
             if (newSeparationWarningData.Count != 0)
@@ -32,28 +34,26 @@ namespace AirTrafficMonitoringSWTTeam3
 
         public void AddSeparations(List<Aircraft> newAircrafts)
         {
+            int counter = 1;
             foreach (Aircraft aircraft in newAircrafts)
             {
-                foreach (Aircraft comparingAircraft in newAircrafts)
+                for (int i = counter; i < newAircrafts.Count; i++)
                 {
+                    int verticalSeparation = Math.Abs(aircraft.Altitude - newAircrafts[i].Altitude);
+                    double xDifference = Math.Abs(aircraft.XCoordinate - newAircrafts[i].XCoordinate);
+                    double yDifference = Math.Abs(aircraft.YCoordinate - newAircrafts[i].YCoordinate);
+                    double horizontalSeparation = Math.Sqrt(Math.Pow(xDifference, 2) + Math.Pow(yDifference, 2));
 
-                    if (aircraft.Tag != comparingAircraft.Tag)
+                    if (verticalSeparation < 300 && horizontalSeparation < 5000)
                     {
-                        int verticalSeparation = Math.Abs(aircraft.Altitude - comparingAircraft.Altitude);
-                        double xDifference = Math.Abs(aircraft.XCoordinate - comparingAircraft.XCoordinate);
-                        double yDifference = Math.Abs(aircraft.YCoordinate - comparingAircraft.YCoordinate);
-                        double horizontalSeparation = Math.Sqrt(Math.Pow(xDifference, 2) + Math.Pow(yDifference, 2));
-
-                        if (verticalSeparation < 300 && horizontalSeparation < 5000)
-                        {
-                            newSeparationWarningData.Add(new SeparationWarningData(aircraft.Tag, comparingAircraft.Tag, aircraft.Timestamp));
-                        }
+                        newSeparationWarningData.Add(new SeparationWarningData(aircraft.Tag, newAircrafts[i].Tag, aircraft.Timestamp));
                     }
                 }
+                counter++;
             }
         }
 
-      public void SeparationController()
+        public void SeparationController()
         {
             foreach (SeparationWarningData newSeparationData in newSeparationWarningData)
             {

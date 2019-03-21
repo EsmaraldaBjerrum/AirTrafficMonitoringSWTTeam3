@@ -7,7 +7,7 @@ using AirTrafficMonitoringSWTTeam3.Events;
 
 namespace AirTrafficMonitoringSWTTeam3.Controler
 {
-    interface IFilter
+    public interface IFilter
     {
         event EventHandler<FilterDataEvent> FilterDataEvent;
     }

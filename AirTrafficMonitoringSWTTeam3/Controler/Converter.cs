@@ -15,7 +15,7 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
         {
             _transponderReceiver = transponderReceiver;
             _transponderReceiver.TransponderDataReady += ConvertMethod;
-            
+
         }
 
         public void ConvertMethod(object sender, RawTransponderDataEventArgs e)
@@ -26,14 +26,16 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
             {
                 string[] aircraftdata = new string[5];
                 aircraftdata = data.Split(';');
-               
-                
-                Aircraft aircraft = new Aircraft(aircraftdata[0], Convert.ToInt32(aircraftdata[1]), Convert.ToInt32(aircraftdata[2]),
-                Convert.ToInt32(aircraftdata[3]), DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
-                System.Globalization.CultureInfo.InvariantCulture));
+
+
+                Aircraft aircraft = new Aircraft(aircraftdata[0], Convert.ToInt32(aircraftdata[1]),
+                    Convert.ToInt32(aircraftdata[2]),
+                    Convert.ToInt32(aircraftdata[3]), DateTime.ParseExact(aircraftdata[4], "yyyyMMddHHmmssfff",
+                        System.Globalization.CultureInfo.InvariantCulture));
                 convertedDataList.Add(aircraft);
             }
 
             ConvertDataEvent?.Invoke(this, new ConvertDataEvent(convertedDataList));
         }
+    }
 }
