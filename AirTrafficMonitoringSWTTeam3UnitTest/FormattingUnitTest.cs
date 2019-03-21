@@ -27,7 +27,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          _fakeCalculator = new Calculator(_fakeTransponderReceiver);
          _fakePrint = Substitute.For<LogToScreen>();
          _fakeSeparationInvestigation = Substitute.For<SeparationInvestigation>(_fakeCalculator);
-         uut = new Formatting_Tracks();
+         //uut = new Formatting_Tracks();
         
       }
 
@@ -40,7 +40,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          fakeAircraft.HorizontalVelocity = 2019;
          fakeList.Add(fakeAircraft);
          
-       uut.StringToPrintTracksOnScreen(fakeList);
+       //uut.StringToPrintTracksOnScreen(fakeList);
 
          _fakePrint.Received().Log("Tag: SKF Current position: X: 21 meters, Y: 8 meters, Current altitude: 1996 meters, Current horizontal velocity: 2019 m/s, Current compass course 180 degress");
        

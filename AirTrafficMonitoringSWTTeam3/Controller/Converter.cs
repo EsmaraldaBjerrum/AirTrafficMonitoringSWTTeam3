@@ -5,11 +5,11 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitoringSWTTeam3.Controler
 {
-    class Converter : IConverter
+   public class Converter : IConverter
     {
         public event EventHandler<ConvertDataEvent> ConvertDataEvent;
         private ITransponderReceiver _transponderReceiver;
-        private List<Aircraft> convertedDataList;
+        public List<Aircraft> convertedDataList;
 
         public Converter(ITransponderReceiver transponderReceiver)
         {

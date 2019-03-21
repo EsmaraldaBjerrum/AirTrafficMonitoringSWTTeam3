@@ -47,12 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
-    <Compile Include="Controler\Converter.cs" />
-    <Compile Include="Controler\Filter.cs" />
-    <Compile Include="Controler\IConverter.cs" />
-    <Compile Include="Controler\IFilter.cs" />
-    <Compile Include="Controler\IUpdater.cs" />
-    <Compile Include="Controler\Updater.cs" />
+    <Compile Include="Controller\Converter.cs" />
+    <Compile Include="Controller\Filter.cs" />
+    <Compile Include="Controller\IConverter.cs" />
+    <Compile Include="Controller\IFilter.cs" />
+    <Compile Include="Controller\IUpdater.cs" />
+    <Compile Include="Controller\Updater.cs" />
     <Compile Include="Events\AirspaceDataEvent.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Events\ConvertDataEvent.cs" />
