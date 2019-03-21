@@ -3,32 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitoringSWTTeam3.Controler;
+using AirTrafficMonitoringSWTTeam3.Events;
 
 
 namespace AirTrafficMonitoringSWTTeam3
 {
     public class SeparationInvestigation
     {
-        private Calculator _calculator;
+        private IUpdated _updated;
         private List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
         private List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
         public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
-        public SeparationInvestigation(Calculator calculator)
+        public SeparationInvestigation(IUpdated updated)
         {
-            _calculator = calculator;
-            _calculator.AirspaceDataEvent += RunSeparationInvestigation;
+            _updated = updated;
+            _updated.UpdatedDataEvent += SeparationController;
 
         }
 
        
 
-            AddSeparations(e.TransponderData);
-            SeparationController();
+        //    AddSeparations(e.TransponderData);
+        //    SeparationController();
 
-            if (newSeparationWarningData.Count != 0)
-                SeparationWarningDataEvent?.Invoke(this, (new SeparationWarningDataEvent(newSeparationWarningData)));
-        }
+        //    if (newSeparationWarningData.Count != 0)
+        //        SeparationWarningDataEvent?.Invoke(this, (new SeparationWarningDataEvent(newSeparationWarningData)));
+        //}
 
         public void AddSeparations(List<Aircraft> newAircrafts)
         {
@@ -54,7 +56,7 @@ namespace AirTrafficMonitoringSWTTeam3
             }
         }
 
-      public void SeparationController()
+      public void SeparationController(object sender, UpdatedDataEvent e)
         {
             foreach (SeparationWarningData newSeparationData in newSeparationWarningData)
             {

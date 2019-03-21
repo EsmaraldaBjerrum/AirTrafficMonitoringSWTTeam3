@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AirTrafficMonitoringSWTTeam3.Controler;
 using TransponderReceiver;
 
 namespace AirTrafficMonitoringSWTTeam3
@@ -13,8 +14,9 @@ namespace AirTrafficMonitoringSWTTeam3
         static void Main(string[] args)
         {
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            
-            SeparationInvestigation _separationInvestigation = new SeparationInvestigation();
+
+            IConverter convert = new Converter(receiver);
+
 
         
 
