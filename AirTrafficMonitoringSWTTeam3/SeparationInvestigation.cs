@@ -11,15 +11,15 @@ namespace AirTrafficMonitoringSWTTeam3
 {
     public class SeparationInvestigation
     {
-        private IUpdated _updated;
+        private IUpdater _updater;
         private List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
         private List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
         public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
-        public SeparationInvestigation(IUpdated updated)
+        public SeparationInvestigation(IUpdater updater)
         {
-            _updated = updated;
-            _updated.UpdatedDataEvent += RunSeparationInvestigation;
+            _updater = updater;
+            _updater.UpdatedDataEvent += RunSeparationInvestigation;
 
         }
 

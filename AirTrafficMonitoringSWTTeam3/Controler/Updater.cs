@@ -4,14 +4,14 @@ using AirTrafficMonitoringSWTTeam3.Events;
 
 namespace AirTrafficMonitoringSWTTeam3.Controler
 {
-    class Updated : IUpdated
+    class Updater : IUpdater
     {
         public event EventHandler<UpdatedDataEvent> UpdatedDataEvent;
         private IFilter _filter;
         public List<Aircraft> WithDataAircrafts;
         public List<Aircraft> WithoutDataAircrafts;
 
-        public Updated(IFilter filter)
+        public Updater(IFilter filter)
         {
             _filter = filter;
             _filter.FilterDataEvent += UpdatedMethod;

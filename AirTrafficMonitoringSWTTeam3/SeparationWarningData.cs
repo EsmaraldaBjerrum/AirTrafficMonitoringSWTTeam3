@@ -14,7 +14,9 @@ namespace AirTrafficMonitoringSWTTeam3
 
         public SeparationWarningData(string aircraftTag1, string aircraftTag2, DateTime separationTimeStamp)
         {
-
+            AircraftTag1 = aircraftTag1;
+            AircraftTag2 = aircraftTag2;
+            SeparationTimeStamp = separationTimeStamp;
         }
     }
 }

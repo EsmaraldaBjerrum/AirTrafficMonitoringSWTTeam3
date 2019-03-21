@@ -13,14 +13,14 @@ namespace AirTrafficMonitoringSWTTeam3
    public class Formatting_Tracks
    {
       private ILog _log;
-       private IUpdated _updated;
+       private IUpdater _updater;
      
 
-      public Formatting_Tracks(IUpdated updated)
+      public Formatting_Tracks(IUpdater updater, ILog log)
       {
-         _log = new LogToScreen();
-          _updated = updated;
-          _updated.UpdatedDataEvent += StringToPrintTracksOnScreen;
+          _log = log;
+          _updater = updater;
+          _updater.UpdatedDataEvent += StringToPrintTracksOnScreen;
 
       }
 

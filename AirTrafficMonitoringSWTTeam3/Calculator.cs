@@ -11,21 +11,21 @@ namespace AirTrafficMonitoringSWTTeam3
     {
         private ITransponderReceiver _transponderReceiver;
        private Formatting_Tracks _formatting;
-        private LogToScreen _print;
+       
 
        private SeparationInvestigation _separationInvestigation;
         public List<Aircraft> WithoutDataAircrafts = new List<Aircraft>();
         public List<Aircraft> WithDataAircrafts = new List<Aircraft>();
         private double velocity;
         public event EventHandler<AirspaceDataEventArgs> AirspaceDataEvent;
-        private bool _newData = false;
+        
        
       
         public Calculator(ITransponderReceiver transponderReceiver)
         {
 
-           _separationInvestigation = new SeparationInvestigation(this);
-            _formatting = new Formatting_Tracks();
+           //_separationInvestigation = new SeparationInvestigation(this);
+           // _formatting = new Formatting_Tracks();
             
 
             _transponderReceiver = transponderReceiver;
@@ -43,7 +43,7 @@ namespace AirTrafficMonitoringSWTTeam3
                 HorizontalVelocity(WithoutDataAircrafts);
                 WithDataAircrafts = new List<Aircraft>(WithoutDataAircrafts);
 
-               _formatting.StringToPrintTracksOnScreen(WithDataAircrafts);
+               //_formatting.StringToPrintTracksOnScreen(WithDataAircrafts);
                
                 AirspaceDataEvent?.Invoke(this, (new AirspaceDataEventArgs(WithDataAircrafts)));
 

@@ -11,13 +11,13 @@ namespace AirTrafficMonitoringSWTTeam3
       private SeparationInvestigation _separationInvestigation;
       private ILog _logFileLog;
       private ILog _logScreenLog;
-      public Formatting_Separation(SeparationInvestigation separationInvestigation)
+      public Formatting_Separation(SeparationInvestigation separationInvestigation, ILog screenLog, ILog Loglog)
       {
          _separationInvestigation = separationInvestigation;
          _separationInvestigation.SeparationWarningDataEvent += StringToPrintSeparationToScreen;
          _separationInvestigation.SeparationWarningDataEvent += StringToPrintSeparationInFile;
-         _logFileLog = new LogToLog();
-         _logScreenLog = new LogToScreen();
+          _logFileLog = Loglog;
+          _logScreenLog = screenLog;
       }
 
       public void StringToPrintSeparationInFile(object sender, SeparationWarningDataEvent e)
@@ -33,8 +33,10 @@ namespace AirTrafficMonitoringSWTTeam3
       {
          foreach (var data in e.TransponderData)
          {
-            string separationTiScreen = "Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
-            _logScreenLog.Log(separationTiScreen);
+             
+                string separationTiScreen = "WARNING! Separation condition between " + data.AircraftTag1 + " and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
+             
+                _logScreenLog.Log(separationTiScreen);
          }
 
       }

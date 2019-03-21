@@ -23,8 +23,10 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
             foreach (Aircraft data in e.ConvertData)
             {
                 if (data.XCoordinate <= 85000 && data.YCoordinate <= 85000)
-                    filterList.Add(data);
+                     filterList.Add(data);
             }
+
+            if (filterList.Count != 0)
             FilterDataEvent?.Invoke(this, new FilterDataEvent(filterList));
         }
     }

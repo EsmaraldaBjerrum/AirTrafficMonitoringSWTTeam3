@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
-   interface ILog
+  public  interface ILog
    {
       void Log(string s);
    }

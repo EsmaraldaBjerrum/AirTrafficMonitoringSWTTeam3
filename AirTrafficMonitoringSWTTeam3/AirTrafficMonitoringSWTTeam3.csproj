@@ -51,8 +51,8 @@
     <Compile Include="Controler\Filter.cs" />
     <Compile Include="Controler\IConverter.cs" />
     <Compile Include="Controler\IFilter.cs" />
-    <Compile Include="Controler\IUpdated.cs" />
-    <Compile Include="Controler\Updated.cs" />
+    <Compile Include="Controler\IUpdater.cs" />
+    <Compile Include="Controler\Updater.cs" />
     <Compile Include="Events\AirspaceDataEvent.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Events\ConvertDataEvent.cs" />

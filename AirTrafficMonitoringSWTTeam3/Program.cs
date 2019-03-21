@@ -15,14 +15,22 @@ namespace AirTrafficMonitoringSWTTeam3
         {
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
-            IConverter convert = new Converter(receiver);
+            IConverter converter = new Converter(receiver);
+            IFilter filter = new Filter(converter);
+            IUpdater updater = new Updater(filter);
+            SeparationInvestigation separationInvestigation = new SeparationInvestigation(updater);
+            
+            ILog logToScreen = new LogToScreen();
+            ILog logToLog = new LogToLog();
+            Formatting_Separation fs = new Formatting_Separation(separationInvestigation, logToScreen, logToLog);
+            Formatting_Tracks ft = new Formatting_Tracks(updater, logToScreen);
 
 
         
 
             while (true)
             {
-                Thread.Sleep(100);
+                
 
             }
         }
