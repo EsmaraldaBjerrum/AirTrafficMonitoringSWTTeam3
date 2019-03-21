@@ -108,26 +108,26 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             Assert.That(uut.WithDataAircrafts[0].Tag.Equals("XYZ987"));
         }
 
-        private SeparationInvestigation _separationInvestigation;
-        private AirspaceDataEventArgs _airspaceEvent;
-        [Test]
-        public void AirspaceCallsSeparationInvestigation()
-        {
-            _separationInvestigation = Substitute.For<SeparationInvestigation>(uut);
-            uut.AirspaceDataEvent += _separationInvestigation.Separation;
+        //private SeparationInvestigation _separationInvestigation;
+        //private AirspaceDataEventArgs _airspaceEvent;
+        //[Test]
+        //public void AirspaceCallsSeparationInvestigation()
+        //{
+        //    _separationInvestigation = Substitute.For<SeparationInvestigation>(uut);
+        //    uut.AirspaceDataEvent += _separationInvestigation.Separation;
             
 
-            List<string> testData = new List<string>();
-            testData.Add("XYZ987;84000;75654;4000;20151006213456789");
-            testData.Add("XYT987;84000;78654;4000;20151006213456789");
+        //    List<string> testData = new List<string>();
+        //    testData.Add("XYZ987;84000;75654;4000;20151006213456789");
+        //    testData.Add("XYT987;84000;78654;4000;20151006213456789");
 
-            // Act: Trigger the fake object to execute event invocation
-            _fakeTransponderReceiver.TransponderDataReady
-                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
+        //    // Act: Trigger the fake object to execute event invocation
+        //    _fakeTransponderReceiver.TransponderDataReady
+        //        += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
             
-            _separationInvestigation.Received(1).RunSeparationInvestigation(this, new AirspaceDataEventArgs(uut.WithDataAircrafts));
+        //    _separationInvestigation.Received(1).RunSeparationInvestigation(this, new AirspaceDataEventArgs(uut.WithDataAircrafts));
             
-        }
+        //}
 
 
         [Test]

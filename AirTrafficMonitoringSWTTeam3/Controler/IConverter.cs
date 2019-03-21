@@ -7,7 +7,7 @@ using AirTrafficMonitoringSWTTeam3.Events;
 
 namespace AirTrafficMonitoringSWTTeam3.Controler
 {
-    interface IConverter
+    public interface IConverter
     {
         event EventHandler<ConvertDataEvent> ConvertDataEvent;
     }

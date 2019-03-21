@@ -10,5 +10,6 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
     public interface IUpdated
     {
         event EventHandler<UpdatedDataEvent> UpdatedDataEvent;
+        
     }
 }
