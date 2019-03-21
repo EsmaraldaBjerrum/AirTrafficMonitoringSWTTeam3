@@ -64,6 +64,11 @@
     <Compile Include="Formatting_SeparationUnitTest.cs" />
     <Compile Include="Formatting_TracksUnitTest.cs" />
     <Compile Include="LogToLogUnitTest.cs" />
+    <Compile Include="Controller\ConverterUnitTest.cs" />
+    <Compile Include="Controller\FilterUnitTest.cs" />
+    <Compile Include="Controller\UpdaterUnitTest.cs" />
+    <Compile Include="FormattingUnitTest.cs" />
+    <Compile Include="PrintUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationInvestigationUnitTest.cs" />
   </ItemGroup>
@@ -76,6 +81,7 @@
       <Name>AirTrafficMonitoringSWTTeam3</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
