@@ -45,7 +45,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             Assert.That(_uut.newSeparationWarningData.Count, Is.EqualTo(numberOfSeparations));
         }
 
-        [Test]
+      
 
     }
 }

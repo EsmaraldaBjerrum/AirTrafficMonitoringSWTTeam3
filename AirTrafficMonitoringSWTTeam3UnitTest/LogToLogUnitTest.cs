@@ -11,17 +11,17 @@ using NUnit.Framework.Internal;
 namespace AirTrafficMonitoringSWTTeam3UnitTest
 {
    [TestFixture]
-   public class PrintUnitTest
+   public class LogToLogUnitTest
    {
-      private LogToScreen uut;
+      private ILog uut;
 
       [SetUp]
       public void SetUp()
       {
-         uut = new LogToScreen();
+         uut = new LogToLog();
       }
-
-      public void PrintSeparationToFile_Succes()
+      [Test]
+      public void Log()
       {
          string test = "Esmaralda er en giraf og Louise er en søløve";
          uut.Log(test);

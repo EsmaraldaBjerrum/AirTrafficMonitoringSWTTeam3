@@ -10,8 +10,6 @@ namespace AirTrafficMonitoringSWTTeam3
    public class LogToScreen : ILog
    {
     
-      
-      
       public void Log(string s)
       {
          Console.WriteLine(s);

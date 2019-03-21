@@ -4,7 +4,7 @@ using AirTrafficMonitoringSWTTeam3.Events;
 
 namespace AirTrafficMonitoringSWTTeam3.Controler
 {
-    class Updater : IUpdater
+    public class Updater : IUpdater
     {
         public event EventHandler<UpdatedDataEvent> UpdatedDataEvent;
         private IFilter _filter;
