@@ -4,10 +4,10 @@ using AirTrafficMonitoringSWTTeam3.Events;
 
 namespace AirTrafficMonitoringSWTTeam3.Controler
 {
-    class Filter : IFilter
+    public class Filter : IFilter
     {
         public event EventHandler<FilterDataEvent> FilterDataEvent;
-        private List<Aircraft> filterList;
+        public List<Aircraft> filterList;
         private IConverter _converter;
 
         public Filter(IConverter converter)

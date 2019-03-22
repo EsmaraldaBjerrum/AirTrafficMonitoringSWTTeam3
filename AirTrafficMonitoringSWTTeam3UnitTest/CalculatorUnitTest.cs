@@ -17,13 +17,13 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
     {
 
         private ITransponderReceiver _fakeTransponderReceiver;
-        private Calculator uut;
+        private Calculator _uut;
 
         [SetUp]
         public void SetUp()
         {
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
-            uut = new Calculator(_fakeTransponderReceiver);
+            _uut = new Calculator(_fakeTransponderReceiver);
         }
 
       
@@ -41,7 +41,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithDataAircrafts.Count.Equals(1));
+            Assert.That(_uut.WithDataAircrafts.Count.Equals(1));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithDataAircrafts[0].XCoordinate.Equals(85000));
+            Assert.That(_uut.WithDataAircrafts[0].XCoordinate.Equals(85000));
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithDataAircrafts[0].YCoordinate.Equals(75654));
+            Assert.That(_uut.WithDataAircrafts[0].YCoordinate.Equals(75654));
         }
         [Test]
         public void AirspaceCorrectAltitude()
@@ -79,7 +79,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithDataAircrafts[0].Altitude.Equals(4000));
+            Assert.That(_uut.WithDataAircrafts[0].Altitude.Equals(4000));
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithDataAircrafts[0].Timestamp.Equals(new DateTime(2015,10,06,21,34,56,789)));
+            Assert.That(_uut.WithDataAircrafts[0].Timestamp.Equals(new DateTime(2015,10,06,21,34,56,789)));
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(uut.WithDataAircrafts[0].Tag.Equals("XYZ987"));
+            Assert.That(_uut.WithDataAircrafts[0].Tag.Equals("XYZ987"));
         }
 
         //private SeparationInvestigation _separationInvestigation;
@@ -137,13 +137,13 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("DAA111", 60000, 10000, 1000, "DAA111", 50000, 10000, 1000, 270)]
         public void CalculateCompassCourse_AircraftTravelingNorthSouthEastWest(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            uut.CalculateCompassCourse(uut.WithoutDataAircrafts);
+            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
 
-            Assert.That(uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
         }
 
 
@@ -156,13 +156,13 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("FAA111", 15000, 10000, 1000, "FAA111", 19000, 20010, 1000, 22)]
         public void CalculateCompassCourse_AircraftTravelingBetweenNorthAndEast(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            uut.CalculateCompassCourse(uut.WithoutDataAircrafts);
+            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
 
-            Assert.That(uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -174,13 +174,13 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("FAA111", 5000, 14000, 1000, "FAA111", 15010, 10000, 1000, 112)]
         public void CalculateCompassCourse_AircraftTravelingBetweenEastAndSouth(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            uut.CalculateCompassCourse(uut.WithoutDataAircrafts);
+            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
 
-            Assert.That(uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -192,13 +192,13 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("FAA111", 14000, 15010, 1000, "FAA111", 10000, 5000, 1000, 202)]
         public void CalculateCompassCourse_AircraftTravelingBetweenSouthAndWest(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            uut.CalculateCompassCourse(uut.WithoutDataAircrafts);
+            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
 
-            Assert.That(uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -210,13 +210,13 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         [TestCase("FAA111", 15010, 10000, 1000, "FAA111", 5000, 14000, 1000, 292)]
         public void CalculateCompassCourse_AircraftTravelingBetweenWestAndNorth(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            uut.CalculateCompassCourse(uut.WithoutDataAircrafts);
+            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
 
-            Assert.That(uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
         }
 
 
@@ -226,15 +226,15 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
        [TestCase("EDB239", 10000, 60000, 1000, "20191203214726980", "EDB239", 20000, 80000, 1000, "20191203215356990", 57.334)]
       public void HorizontalVelocity(string t1, int x1, int y1, int a1, string ts1, string t2, int x2, int y2, int a2, string ts2, double velocity1)
        {
-         uut.WithDataAircrafts.Add(new Aircraft(t1,x1,y1,a1, (DateTime.ParseExact(ts1, "yyyyMMddHHmmssfff",
+         _uut.WithDataAircrafts.Add(new Aircraft(t1,x1,y1,a1, (DateTime.ParseExact(ts1, "yyyyMMddHHmmssfff",
             System.Globalization.CultureInfo.InvariantCulture))));
 
-        uut.WithoutDataAircrafts.Add(new Aircraft(t2,x2,y2,a2, (DateTime.ParseExact(ts2, "yyyyMMddHHmmssfff",
+        _uut.WithoutDataAircrafts.Add(new Aircraft(t2,x2,y2,a2, (DateTime.ParseExact(ts2, "yyyyMMddHHmmssfff",
              System.Globalization.CultureInfo.InvariantCulture))));
          
-          uut.HorizontalVelocity(uut.WithoutDataAircrafts);
+          _uut.HorizontalVelocity(_uut.WithoutDataAircrafts);
 
-          Assert.That(uut.WithoutDataAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.01));
+          Assert.That(_uut.WithoutDataAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.01));
        }
 
        

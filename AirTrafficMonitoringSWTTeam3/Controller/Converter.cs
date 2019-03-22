@@ -11,6 +11,7 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
         private ITransponderReceiver _transponderReceiver;
         public List<Aircraft> convertedDataList;
 
+
         public Converter(ITransponderReceiver transponderReceiver)
         {
             _transponderReceiver = transponderReceiver;
