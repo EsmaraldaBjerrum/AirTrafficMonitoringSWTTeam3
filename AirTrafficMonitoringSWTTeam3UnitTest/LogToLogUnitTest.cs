@@ -23,10 +23,14 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       [Test]
       public void Log()
       {
+         StreamWriter streamWriter = new StreamWriter("SeparationLog.txt");
+         streamWriter.Flush();
+         streamWriter.Close();
+
          string test = "Esmaralda er en giraf og Louise er en søløve";
          uut.Log(test);
 
-         FileStream input = new FileStream("SeparationLog.txt",FileMode.Open,FileAccess.Read);
+         FileStream input = new FileStream("SeparationLog.txt", FileMode.Open,FileAccess.Read);
          StreamReader fileReader = new StreamReader(input);
 
          string FileString = fileReader.ReadLine();
