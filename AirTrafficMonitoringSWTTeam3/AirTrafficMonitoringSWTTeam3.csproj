@@ -53,8 +53,6 @@
     <Compile Include="Controller\IFilter.cs" />
     <Compile Include="Controller\IUpdater.cs" />
     <Compile Include="Controller\Updater.cs" />
-    <Compile Include="Events\AirspaceDataEvent.cs" />
-    <Compile Include="Calculator.cs" />
     <Compile Include="Events\ConvertDataEvent.cs" />
     <Compile Include="Events\FilterDataEvent.cs" />
     <Compile Include="Events\UpdatedDataEvent.cs" />

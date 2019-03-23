@@ -19,7 +19,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       private Formatting_Tracks uutstring;
       private IUpdater _fakeUpdater;
       private ILog _fakeLoglog;
-      private ILog _fakeLogFile;
+      //private ILog _fakeLogFile;
       private SeparationInvestigation _fakeSeparationInvestigation;
 
 

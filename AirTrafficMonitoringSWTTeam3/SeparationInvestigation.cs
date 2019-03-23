@@ -46,7 +46,8 @@ namespace AirTrafficMonitoringSWTTeam3
 
                     if (verticalSeparation < 300 && horizontalSeparation < 5000)
                     {
-                        newSeparationWarningData.Add(new SeparationWarningData(aircraft.Tag, newAircrafts[i].Tag, aircraft.Timestamp));
+                        DateTime timeStamp = aircraft.Timestamp;
+                        newSeparationWarningData.Add(new SeparationWarningData(aircraft.Tag, newAircrafts[i].Tag, timeStamp));
                     }
                 }
                 counter++;
@@ -55,7 +56,11 @@ namespace AirTrafficMonitoringSWTTeam3
 
         public void SeparationController()
         {
-            foreach (SeparationWarningData newSeparationData in newSeparationWarningData)
+            List<SeparationWarningData> localNewSeparationWarningData = new List<SeparationWarningData>(newSeparationWarningData);
+
+            //List<SeparationWarningData> dataToBeRemoved = new List<SeparationWarningData>();
+
+            foreach (SeparationWarningData newSeparationData in localNewSeparationWarningData)
             {
                 foreach (SeparationWarningData oldSeparationData in oldSeparationWarningData)
                 {
@@ -65,6 +70,8 @@ namespace AirTrafficMonitoringSWTTeam3
                          newSeparationData.AircraftTag1 == oldSeparationData.AircraftTag2)
                     {
                         newSeparationWarningData.Remove(newSeparationData);
+
+                        //dataToBeRemoved.Add(new SeparationWarningData(newSeparationData.AircraftTag1, newSeparationData.AircraftTag2, newSeparationData.SeparationTimeStamp));
                     }
                 }
             }
