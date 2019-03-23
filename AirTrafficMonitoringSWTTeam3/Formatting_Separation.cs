@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
-   class Formatting_Separation
+   public class Formatting_Separation
    {
       private SeparationInvestigation _separationInvestigation;
       private ILog _logFileLog;

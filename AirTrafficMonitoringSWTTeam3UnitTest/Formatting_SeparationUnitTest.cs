@@ -16,7 +16,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
    {
 
       private LogToScreen _fakePrint;
-      private Formatting_Tracks uutstring;
+      private Formatting_Separation uutstring;
       private IUpdater _fakeUpdater;
       private ILog _fakeLoglog;
       //private ILog _fakeLogFile;
@@ -31,7 +31,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          _fakeUpdater = Substitute.For<IUpdater>();
          _fakeLoglog = Substitute.For<LogToLog>();
          _fakeSeparationInvestigation = new SeparationInvestigation(_fakeUpdater);
-         uutstring = new Formatting_Tracks(_fakeUpdater, _fakeLoglog);
+         uutstring = new Formatting_Separation(_fakeSeparationInvestigation,_fakePrint,_fakeLoglog);
       }
       [Test]
       public void SeparationOccur_Eventfired_StringReadyToScreen()
