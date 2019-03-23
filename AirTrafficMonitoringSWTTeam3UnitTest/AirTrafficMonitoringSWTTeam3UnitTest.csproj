@@ -60,7 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculatorUnitTest.cs" />
     <Compile Include="Formatting_SeparationUnitTest.cs" />
     <Compile Include="Formatting_TracksUnitTest.cs" />
     <Compile Include="LogToLogUnitTest.cs" />
