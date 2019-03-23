@@ -47,7 +47,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeConverter.ConvertDataEvent
                 += Raise.EventWith(this, new ConvertDataEvent (testData));
 
-            Assert.That(_uut.filterList.Count.Equals(1));
+            Assert.That(_uut.filterList.Count.Equals(0));
         }
 
 
