@@ -61,16 +61,19 @@ namespace AirTrafficMonitoringSWTTeam3
 
             foreach (SeparationWarningData newSeparationData in localNewSeparationWarningData)
             {
-                foreach (SeparationWarningData oldSeparationData in oldSeparationWarningData)
+                if (oldSeparationWarningData.Count != 0)
                 {
-                    if (newSeparationData.AircraftTag1 == oldSeparationData.AircraftTag1 &&
-                        newSeparationData.AircraftTag2 == oldSeparationData.AircraftTag2 ||
-                        newSeparationData.AircraftTag2 == oldSeparationData.AircraftTag1 &&
-                         newSeparationData.AircraftTag1 == oldSeparationData.AircraftTag2)
+                    foreach (SeparationWarningData oldSeparationData in oldSeparationWarningData)
                     {
-                        newSeparationWarningData.Remove(newSeparationData);
+                        if (newSeparationData.AircraftTag1 == oldSeparationData.AircraftTag1 &&
+                            newSeparationData.AircraftTag2 == oldSeparationData.AircraftTag2 ||
+                            newSeparationData.AircraftTag2 == oldSeparationData.AircraftTag1 &&
+                            newSeparationData.AircraftTag1 == oldSeparationData.AircraftTag2)
+                        {
+                            newSeparationWarningData.Remove(newSeparationData);
 
-                        //dataToBeRemoved.Add(new SeparationWarningData(newSeparationData.AircraftTag1, newSeparationData.AircraftTag2, newSeparationData.SeparationTimeStamp));
+                            //dataToBeRemoved.Add(new SeparationWarningData(newSeparationData.AircraftTag1, newSeparationData.AircraftTag2, newSeparationData.SeparationTimeStamp));
+                        }
                     }
                 }
             }
