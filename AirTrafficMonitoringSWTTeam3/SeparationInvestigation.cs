@@ -46,7 +46,8 @@ namespace AirTrafficMonitoringSWTTeam3
 
                     if (verticalSeparation < 300 && horizontalSeparation < 5000)
                     {
-                        newSeparationWarningData.Add(new SeparationWarningData(aircraft.Tag, newAircrafts[i].Tag, aircraft.Timestamp));
+                        DateTime timeStamp = aircraft.Timestamp;
+                        newSeparationWarningData.Add(new SeparationWarningData(aircraft.Tag, newAircrafts[i].Tag, timeStamp));
                     }
                 }
                 counter++;
