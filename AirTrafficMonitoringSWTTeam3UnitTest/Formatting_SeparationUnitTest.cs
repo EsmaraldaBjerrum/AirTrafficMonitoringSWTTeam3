@@ -16,7 +16,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
    {
 
       private LogToScreen _fakePrint;
-      private Formatting_Tracks uutstring;
+      private Formatting_Separation uutstring;
       private IUpdater _fakeUpdater;
       private ILog _fakeLoglog;
       //private ILog _fakeLogFile;
@@ -31,7 +31,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          _fakeUpdater = Substitute.For<IUpdater>();
          _fakeLoglog = Substitute.For<LogToLog>();
          _fakeSeparationInvestigation = new SeparationInvestigation(_fakeUpdater);
-         uutstring = new Formatting_Tracks(_fakeUpdater, _fakeLoglog);
+         uutstring = new Formatting_Separation(_fakeSeparationInvestigation,_fakePrint,_fakeLoglog);
       }
       [Test]
       public void SeparationOccur_Eventfired_StringReadyToScreen()
@@ -52,16 +52,17 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       public void SeparationOccur_Eventfired_StringReadyToFile()
       {
          List<SeparationWarningData> fakeList = new List<SeparationWarningData>();
-         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData("SKF", "LBS", DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture));
+
+         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData("SKF", "LBS", (DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
+            System.Globalization.CultureInfo.InvariantCulture)));
         
          fakeList.Add(fakeSeparationWarningData);
 
          _fakeSeparationInvestigation.SeparationWarningDataEvent +=
-            Raise.EventWith(new SeparationWarningDataEvent(fakeList));
+            Raise.EventWith(this,new SeparationWarningDataEvent(fakeList));
 
          _fakeLoglog.Received().Log("Separation condition between SKF and LBS at 03-12-2019 21:34:26");
-
+         
       }
    }
 }
