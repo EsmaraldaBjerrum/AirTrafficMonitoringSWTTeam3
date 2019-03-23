@@ -52,16 +52,17 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       public void SeparationOccur_Eventfired_StringReadyToFile()
       {
          List<SeparationWarningData> fakeList = new List<SeparationWarningData>();
-         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData("SKF", "LBS", DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
-             System.Globalization.CultureInfo.InvariantCulture));
+
+         SeparationWarningData fakeSeparationWarningData = new SeparationWarningData("SKF", "LBS", (DateTime.ParseExact("20191203213426980", "yyyyMMddHHmmssfff",
+            System.Globalization.CultureInfo.InvariantCulture)));
         
          fakeList.Add(fakeSeparationWarningData);
 
          _fakeSeparationInvestigation.SeparationWarningDataEvent +=
-            Raise.EventWith(new SeparationWarningDataEvent(fakeList));
+            Raise.EventWith(this,new SeparationWarningDataEvent(fakeList));
 
          _fakeLoglog.Received().Log("Separation condition between SKF and LBS at 03-12-2019 21:34:26");
-
+         
       }
    }
 }
