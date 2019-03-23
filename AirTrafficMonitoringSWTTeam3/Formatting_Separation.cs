@@ -6,39 +6,42 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
-   class Formatting_Separation
-   {
-      private SeparationInvestigation _separationInvestigation;
-      private ILog _logFileLog;
-      private ILog _logScreenLog;
-      public Formatting_Separation(SeparationInvestigation separationInvestigation, ILog screenLog, ILog Loglog)
-      {
-         _separationInvestigation = separationInvestigation;
-         _separationInvestigation.SeparationWarningDataEvent += StringToPrintSeparationToScreen;
-         _separationInvestigation.SeparationWarningDataEvent += StringToPrintSeparationInFile;
-          _logFileLog = Loglog;
-          _logScreenLog = screenLog;
-      }
+    public class Formatting_Separation
+    {
+        private SeparationInvestigation _separationInvestigation;
+        private ILog _logFileLog;
+        private ILog _logScreenLog;
 
-      public void StringToPrintSeparationInFile(object sender, SeparationWarningDataEvent e)
-      {
-         foreach (var data in e.TransponderData)
-         {
-            string separationToFile = "Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
-            _logFileLog.Log(separationToFile);
-         }
-      }
+        public Formatting_Separation()
+        { }
+        public Formatting_Separation(SeparationInvestigation separationInvestigation, ILog screenLog, ILog Loglog)
+        {
+            _separationInvestigation = separationInvestigation;
+            _separationInvestigation.SeparationWarningDataEvent += StringToPrintSeparationToScreen;
+            _separationInvestigation.SeparationWarningDataEvent += StringToPrintSeparationInFile;
+            _logFileLog = Loglog;
+            _logScreenLog = screenLog;
+        }
 
-      public void StringToPrintSeparationToScreen(object sender, SeparationWarningDataEvent e)
-      {
-         foreach (var data in e.TransponderData)
-         {
-             
+        public void StringToPrintSeparationInFile(object sender, SeparationWarningDataEvent e)
+        {
+            foreach (var data in e.TransponderData)
+            {
+                string separationToFile = "Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
+                _logFileLog.Log(separationToFile);
+            }
+        }
+
+        public void StringToPrintSeparationToScreen(object sender, SeparationWarningDataEvent e)
+        {
+            foreach (var data in e.TransponderData)
+            {
+
                 string separationTiScreen = "WARNING! Separation condition between " + data.AircraftTag1 + " and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
-             
-                _logScreenLog.Log(separationTiScreen);
-         }
 
-      }
-   }
+                _logScreenLog.Log(separationTiScreen);
+            }
+
+        }
+    }
 }

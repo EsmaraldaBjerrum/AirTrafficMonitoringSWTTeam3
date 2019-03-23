@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using AirTrafficMonitoringSWTTeam3;
 using AirTrafficMonitoringSWTTeam3.Controler;
+using AirTrafficMonitoringSWTTeam3.Events;
 using NSubstitute;
 
 namespace AirTrafficMonitoringSWTTeam3UnitTest
@@ -15,11 +16,13 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
     {
         private SeparationInvestigation _uut;
         private IUpdater fakeUpdater;
+        private Formatting_Separation fakeFormattingSeparation;
        
         [SetUp]
         public void SetUp()
         {
             fakeUpdater = Substitute.For<IUpdater>();
+            fakeFormattingSeparation = Substitute.For<Formatting_Separation>();
             _uut = new SeparationInvestigation(fakeUpdater);
 
         }
@@ -79,6 +82,53 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             _uut.SeparationController();
 
             Assert.That(_uut.newSeparationWarningData.Count, Is.EqualTo(numberOfNewSeparations));
+        }
+
+        [Test]
+        public void SeparationInvestigation_Calls_FormattingSeparationToFileMethode()
+        {
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add(new Aircraft("ATR423", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+            testData.Add(new Aircraft("BCD123", 10005, 85001, 12000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+            testData.Add(new Aircraft("XYZ98", 85000, 75654, 4000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+            testData.Add(new Aircraft("XYZ986", 90059, 90654, 4000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+
+            // Act: Trigger the fake object to execute event invocation
+            fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(testData));
+            
+            fakeFormattingSeparation.Received(1).StringToPrintSeparationInFile(this, new SeparationWarningDataEvent(_uut.newSeparationWarningData));
+
+        }
+        [Test]
+        public void SeparationInvestigation_Calls_FormattingSeparationToScreenMethode()
+        {
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add(new Aircraft("ATR423", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+            testData.Add(new Aircraft("BCD123", 10005, 85001, 12000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+            testData.Add(new Aircraft("XYZ98", 85000, 75654, 4000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+            testData.Add(new Aircraft("XYZ986", 90059, 90654, 4000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
+
+            // Act: Trigger the fake object to execute event invocation
+            fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(testData));
+
+            fakeFormattingSeparation.Received(1).StringToPrintSeparationToScreen(this, new SeparationWarningDataEvent(_uut.newSeparationWarningData));
+
         }
 
     }
