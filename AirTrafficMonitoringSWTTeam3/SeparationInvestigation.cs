@@ -78,7 +78,7 @@ namespace AirTrafficMonitoringSWTTeam3
                 }
             }
 
-            oldSeparationWarningData = newSeparationWarningData;
+            oldSeparationWarningData = new List<SeparationWarningData>(localNewSeparationWarningData);
         }
     }
 }

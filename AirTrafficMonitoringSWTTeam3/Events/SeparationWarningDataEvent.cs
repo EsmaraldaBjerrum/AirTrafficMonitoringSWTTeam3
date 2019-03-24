@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitoringSWTTeam3
+namespace AirTrafficMonitoringSWTTeam3.Events
 {
     public class SeparationWarningDataEvent : EventArgs
     {

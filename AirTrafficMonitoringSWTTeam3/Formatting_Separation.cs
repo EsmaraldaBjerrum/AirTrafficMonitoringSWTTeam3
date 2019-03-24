@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitoringSWTTeam3.Events;
 
 namespace AirTrafficMonitoringSWTTeam3
 {
@@ -27,7 +28,7 @@ namespace AirTrafficMonitoringSWTTeam3
         {
             foreach (var data in e.TransponderData)
             {
-                string separationToFile = "Separation condition between " + data.AircraftTag1 + "and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
+                string separationToFile = "Separation condition between " + data.AircraftTag1 + " and " + data.AircraftTag2 + " at " + data.SeparationTimeStamp;
                 _logFileLog.Log(separationToFile);
             }
         }

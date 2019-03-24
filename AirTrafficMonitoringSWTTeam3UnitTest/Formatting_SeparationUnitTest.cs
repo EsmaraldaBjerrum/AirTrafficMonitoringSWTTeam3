@@ -44,7 +44,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
          _fakeSeparationInvestigation.SeparationWarningDataEvent += Raise.EventWith(this, new SeparationWarningDataEvent(fakeList));
 
-       _fakePrint.Received().Log("WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26");
+       _fakePrint.Received(1).Log("WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26");
 
       }
 
