@@ -27,13 +27,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
         }
 
-        [Test]
-        public void RunSeparation_IsCalled()
-        {
-            
-
-        }
-
+       
         [Test]
         [TestCase("AAA111", 10000, 10000, 1000, "CAA111", 50000, 40000, 5000, 0)]
         [TestCase("BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, 1)]

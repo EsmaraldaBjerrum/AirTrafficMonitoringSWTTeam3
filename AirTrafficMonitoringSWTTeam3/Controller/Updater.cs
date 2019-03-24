@@ -6,6 +6,7 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
 {
     public class Updater : IUpdater
     {
+        private double velocity;
         public event EventHandler<UpdatedDataEvent> UpdatedDataEvent;
         private IFilter _filter;
         public List<Aircraft> WithDataAircrafts;
@@ -100,7 +101,7 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
                 }
             }
         }
-        private double velocity;
+        
 
         public void HorizontalVelocity(List<Aircraft> WithoutDataaircrafts)
         {
