@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aircraft.cs" />
+    <Compile Include="DTO\Aircraft.cs" />
     <Compile Include="Controller\Converter.cs" />
     <Compile Include="Controller\Filter.cs" />
     <Compile Include="Controller\IConverter.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="LogToScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeparationWarningData.cs" />
+    <Compile Include="DTO\SeparationWarningData.cs" />
     <Compile Include="Events\SeparationWarningDataEvent.cs" />
     <Compile Include="SeparationInvestigation.cs" />
   </ItemGroup>
