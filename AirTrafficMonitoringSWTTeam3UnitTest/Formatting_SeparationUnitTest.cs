@@ -42,9 +42,9 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          
          fakeList.Add(fakeSeparationWarningData);
 
-         _fakeSeparationInvestigation.SeparationWarningDataEvent += Raise.EventWith(this, new SeparationWarningDataEvent(fakeList));
+          uut.StringToPrintSeparationInFile(this, new SeparationWarningDataEvent(fakeList));
 
-       _fakePrint.Received().Log(Arg.Is<string>("WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26"));
+            _fakePrint.Received(1).Log(" WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26");
 
       }
 
@@ -58,10 +58,9 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         
          fakeList.Add(fakeSeparationWarningData);
 
-         _fakeSeparationInvestigation.SeparationWarningDataEvent +=
-            Raise.EventWith(this,new SeparationWarningDataEvent(fakeList));
+         uut.StringToPrintSeparationInFile(this, new SeparationWarningDataEvent(fakeList));
 
-         _fakeLoglog.Received().Log(Arg.Is<string>("WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26"));
+         _fakeLoglog.Received().Log(" Separation condition between SKF and LBS at 03-12-2019 21:34:26");
          
       }
    }
