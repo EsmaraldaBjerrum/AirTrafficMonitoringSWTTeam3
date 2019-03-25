@@ -31,21 +31,21 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
       }
 
-      [Test]
-      public void StringToPrintTracksOnScreen()
-      {
-         List<Aircraft> fakeList = new List<Aircraft>();
-         Aircraft fakeAircraft = new Aircraft("SKF", 21, 8, 1996, DateTime.Now);
-         fakeAircraft.CompassCourse = 180;
-         fakeAircraft.HorizontalVelocity = 2019;
-         fakeList.Add(fakeAircraft);
+      //[Test]
+      //public void StringToPrintTracksOnScreen()
+      //{
+      //   List<Aircraft> fakeList = new List<Aircraft>();
+      //   Aircraft fakeAircraft = new Aircraft("SKF", 21, 8, 1996, DateTime.Now);
+      //   fakeAircraft.CompassCourse = 180;
+      //   fakeAircraft.HorizontalVelocity = 2019;
+      //   fakeList.Add(fakeAircraft);
 
-         _fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(fakeList));
+      //   _fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(fakeList));
 
-         _fakePrint.Received()
-            .Log(Arg.Is<string>("Tag: SKF Current position: X: 21 meters, Y: 8 meters, Current altitude: 1996 meters, Current horizontal velocity: 2019 m/s, Current compass course 180 degress"));
+      //   _fakePrint.Received()
+      //      .Log(Arg.Is<string>("Tag: SKF Current position: X: 21 meters, Y: 8 meters, Current altitude: 1996 meters, Current horizontal velocity: 2019 m/s, Current compass course 180 degress"));
 
-      }
+      //}
       
    }
 }
