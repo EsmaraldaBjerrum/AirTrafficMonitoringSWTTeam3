@@ -89,7 +89,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             testData.Add(new Aircraft("ATR423", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
                 "yyyyMMddHHmmssfff",
                 System.Globalization.CultureInfo.InvariantCulture)));
-            testData.Add(new Aircraft("BCD123", 10005, 85001, 12000, DateTime.ParseExact("20151006213456789",
+            testData.Add(new Aircraft("BCD123", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
                 "yyyyMMddHHmmssfff",
                 System.Globalization.CultureInfo.InvariantCulture)));
             testData.Add(new Aircraft("XYZ98", 85000, 75654, 4000, DateTime.ParseExact("20151006213456789",
@@ -112,7 +112,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             testData.Add(new Aircraft("ATR423", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
                 "yyyyMMddHHmmssfff",
                 System.Globalization.CultureInfo.InvariantCulture)));
-            testData.Add(new Aircraft("BCD123", 10005, 85001, 12000, DateTime.ParseExact("20151006213456789",
+            testData.Add(new Aircraft("BCD123", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
                 "yyyyMMddHHmmssfff",
                 System.Globalization.CultureInfo.InvariantCulture)));
             testData.Add(new Aircraft("XYZ98", 85000, 75654, 4000, DateTime.ParseExact("20151006213456789",
@@ -123,7 +123,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
                 System.Globalization.CultureInfo.InvariantCulture)));
 
             // Act: Trigger the fake object to execute event invocation
-            fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(testData));
+           _uut.RunSeparationInvestigation(this, new UpdatedDataEvent(testData));
 
             fakeFormattingSeparation.Received(1).StringToPrintSeparationToScreen(this, new SeparationWarningDataEvent(_uut.newSeparationWarningData));
 
