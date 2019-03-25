@@ -33,37 +33,37 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         }
 
 
+        //[Test]
+        //[TestCase("AAA111", 10000, 10000, 1000, "CAA111", 50000, 40000, 5000, 0)]
+        //[TestCase("BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, 1)]
+        //public void AddSeparation_AircraftXAndYIsISeparation_ZNewSeparationIsAdded(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int numberOfSeparations)
+        //{
+        //    List<Aircraft> testAircraft = new List<Aircraft>();
+        //    testAircraft.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+        //    testAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+
+        //    _uut.AddSeparations(testAircraft);
+
+        //    Assert.That(_uut.newSeparationWarningData.Count.Equals(numberOfSeparations));
+        //}
+
         [Test]
-        [TestCase("AAA111", 10000, 10000, 1000, "CAA111", 50000, 40000, 5000, 0)]
-        [TestCase("BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, 1)]
-        public void AddSeparation_AircraftXAndYIsISeparation_ZNewSeparationIsAdded(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int numberOfSeparations)
+        [TestCase("1AA111", 40000, 51000, 2000, "BAA111", 10000, 5000, 1000, "FAA111", 30000, 10000, 5000, 0)]
+        [TestCase("BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, "EAA111", 30000, 40000, 5000, 1)]
+        [TestCase("BAA111", 10000, 51000, 1200, "DAA111", 10000, 50000, 1000, "EAA111", 10000, 49000, 800, 2)]
+        [TestCase("BAA111", 10000, 50000, 1000, "DAA111", 10000, 50000, 1000, "EAA111", 10000, 50000, 1000, 3)]
+        public void AddSeparation_AircraftXAndYAndQIsInSeparation_ZNewSeparationsIsAdded(string t1, int x1, int y1,
+            int a1, string t2, int x2, int y2, int a2, string t3, int x3, int y3, int a3, int numberOfSeparations)
         {
             List<Aircraft> testAircraft = new List<Aircraft>();
             testAircraft.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
             testAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            testAircraft.Add(new Aircraft(t3, x3, y3, a3, DateTime.Now));
 
             _uut.AddSeparations(testAircraft);
 
-            Assert.That(_uut.newSeparationWarningData.Count.Equals(numberOfSeparations));
+            Assert.That(_uut.newSeparationWarningData.Count, Is.EqualTo(numberOfSeparations));
         }
-
-        //        [Test]
-        //        [TestCase("1AA111", 40000, 51000, 2000, "BAA111", 10000, 5000, 1000, "FAA111", 30000, 10000, 5000, 0)]
-        //        [TestCase("BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, "EAA111", 30000, 40000, 5000, 1)]
-        //        [TestCase("BAA111", 10000, 51000, 1200, "DAA111", 10000, 50000, 1000, "EAA111", 10000, 49000, 800, 2)]
-        //        [TestCase("BAA111", 10000, 50000, 1000, "DAA111", 10000, 50000, 1000, "EAA111", 10000, 50000, 1000, 3)]
-        //        public void AddSeparation_AircraftXAndYAndQIsInSeparation_ZNewSeparationsIsAdded(string t1, int x1, int y1,
-        //            int a1, string t2, int x2, int y2, int a2, string t3, int x3, int y3, int a3, int numberOfSeparations)
-        //        {
-        //            List<Aircraft> testAircraft = new List<Aircraft>();
-        //            testAircraft.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
-        //            testAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
-        //            testAircraft.Add(new Aircraft(t3, x3, y3, a3, DateTime.Now));
-
-        //            _uut.AddSeparations(testAircraft);
-
-        //            Assert.That(_uut.newSeparationWarningData.Count, Is.EqualTo(numberOfSeparations));
-        //        }
 
         //        [Test]
         //        [TestCase("AAA111", "BBBB111", "CCC111", "DDD111", "EEE111", "FFF111", "GGG111", "HHH111", 2)]
