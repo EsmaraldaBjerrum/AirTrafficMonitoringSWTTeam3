@@ -13,8 +13,7 @@ namespace AirTrafficMonitoringSWTTeam3
         private ILog _logFileLog;
         private ILog _logScreenLog;
 
-        public Formatting_Separation()
-        { }
+       
         public Formatting_Separation(SeparationInvestigation separationInvestigation, ILog screenLog, ILog Loglog)
         {
             _separationInvestigation = separationInvestigation;

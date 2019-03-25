@@ -42,7 +42,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
          
          fakeList.Add(fakeSeparationWarningData);
 
-          uut.StringToPrintSeparationInFile(this, new SeparationWarningDataEvent(fakeList));
+          uut.StringToPrintSeparationToScreen(this, new SeparationWarningDataEvent(fakeList));
 
             _fakePrint.Received(1).Log(" WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26");
 
