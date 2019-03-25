@@ -19,7 +19,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         private ILog fakeLogToLog;
         private ILog fakeLogToScreen;
         private Formatting_Separation fakeFormattingSeparation;
-       
+
         [SetUp]
         public void SetUp()
         {
@@ -28,8 +28,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
             fakeLogToScreen = Substitute.For<ILog>();
             _uut = new SeparationInvestigation(fakeUpdater);
             fakeFormattingSeparation = Substitute.For<Formatting_Separation>(_uut, fakeLogToLog, fakeLogToScreen);
-
-
+            
         }
 
 
@@ -44,7 +43,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
             _uut.AddSeparations(testAircraft);
 
-            Assert.That(_uut.newSeparationWarningData.Count, Is.EqualTo(numberOfSeparations));
+            Assert.That(_uut.newSeparationWarningData.Count.Equals(numberOfSeparations));
         }
 
         [Test]
@@ -72,11 +71,11 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
         public void SeparationController_XOldAndYNew_ZNew(string a, string b, string c, string d, string e, string f, string g, string h, int numberOfNewSeparations)
         {
-            _uut.oldSeparationWarningData.Add(new SeparationWarningData(a,b,DateTime.Now));
-            _uut.oldSeparationWarningData.Add(new SeparationWarningData(c,d, DateTime.Now));
+            _uut.oldSeparationWarningData.Add(new SeparationWarningData(a, b, DateTime.Now));
+            _uut.oldSeparationWarningData.Add(new SeparationWarningData(c, d, DateTime.Now));
 
-            _uut.newSeparationWarningData.Add(new SeparationWarningData(e,f,DateTime.Now));
-            _uut.newSeparationWarningData.Add(new SeparationWarningData(g,h,DateTime.Now));
+            _uut.newSeparationWarningData.Add(new SeparationWarningData(e, f, DateTime.Now));
+            _uut.newSeparationWarningData.Add(new SeparationWarningData(g, h, DateTime.Now));
 
             _uut.SeparationController();
 
@@ -102,7 +101,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
             // Act: Trigger the fake object to execute event invocation
             fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(testData));
-            
+
             fakeFormattingSeparation.Received(1).StringToPrintSeparationInFile(this, new SeparationWarningDataEvent(_uut.newSeparationWarningData));
 
         }
