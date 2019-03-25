@@ -1,36 +1,36 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using NUnit.Framework;
-//using AirTrafficMonitoringSWTTeam3;
-//using AirTrafficMonitoringSWTTeam3.Controler;
-//using AirTrafficMonitoringSWTTeam3.Events;
-//using NSubstitute;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using AirTrafficMonitoringSWTTeam3;
+using AirTrafficMonitoringSWTTeam3.Controler;
+using AirTrafficMonitoringSWTTeam3.Events;
+using NSubstitute;
 
-//namespace AirTrafficMonitoringSWTTeam3UnitTest
-//{
-//    [TestFixture]
-//    class SeparationInvestigationUnitTest
-//    {
-//        private SeparationInvestigation _uut;
-//        private IUpdater fakeUpdater;
-//        private ILog fakeLogToLog;
-//        private ILog fakeLogToScreen;
-//        private Formatting_Separation fakeFormattingSeparation;
-       
-//        [SetUp]
-//        public void SetUp()
-//        {
-//            fakeUpdater = Substitute.For<IUpdater>();
-//            fakeLogToLog = Substitute.For<ILog>();
-//            fakeLogToScreen = Substitute.For<ILog>();
-//            _uut = new SeparationInvestigation(fakeUpdater);
-//            fakeFormattingSeparation = Substitute.For<Formatting_Separation>(_uut, fakeLogToLog, fakeLogToScreen);
+namespace AirTrafficMonitoringSWTTeam3UnitTest
+{
+    [TestFixture]
+    class SeparationInvestigationUnitTest
+    {
+        private SeparationInvestigation _uut;
+        private IUpdater fakeUpdater;
+        private ILog fakeLogToLog;
+        private ILog fakeLogToScreen;
+        private Formatting_Separation fakeFormattingSeparation;
+
+        [SetUp]
+        public void SetUp()
+        {
+            fakeUpdater = Substitute.For<IUpdater>();
+            fakeLogToLog = Substitute.For<ILog>();
+            fakeLogToScreen = Substitute.For<ILog>();
+            _uut = new SeparationInvestigation(fakeUpdater);
+            fakeFormattingSeparation = Substitute.For<Formatting_Separation>(_uut, fakeLogToLog, fakeLogToScreen);
 
 
-//        }
+        }
 
 
 //        [Test]
@@ -102,7 +102,7 @@
 
 //            // Act: Trigger the fake object to execute event invocation
 //            fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(testData));
-            
+
 //            fakeFormattingSeparation.Received(1).StringToPrintSeparationInFile(this, new SeparationWarningDataEvent(_uut.newSeparationWarningData));
 
 //        }
@@ -130,5 +130,5 @@
 
 //        }
 
-//    }
-//}
+    }
+}
