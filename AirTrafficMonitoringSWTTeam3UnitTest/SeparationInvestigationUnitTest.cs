@@ -16,18 +16,23 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
     {
         private SeparationInvestigation _uut;
         private IUpdater fakeUpdater;
+        private ILog fakeLogToLog;
+        private ILog fakeLogToScreen;
         private Formatting_Separation fakeFormattingSeparation;
        
         [SetUp]
         public void SetUp()
         {
             fakeUpdater = Substitute.For<IUpdater>();
-            fakeFormattingSeparation = Substitute.For<Formatting_Separation>();
+            fakeLogToLog = Substitute.For<ILog>();
+            fakeLogToScreen = Substitute.For<ILog>();
             _uut = new SeparationInvestigation(fakeUpdater);
+            fakeFormattingSeparation = Substitute.For<Formatting_Separation>(_uut, fakeLogToLog, fakeLogToScreen);
+
 
         }
 
-       
+
         [Test]
         [TestCase("AAA111", 10000, 10000, 1000, "CAA111", 50000, 40000, 5000, 0)]
         [TestCase("BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, 1)]
