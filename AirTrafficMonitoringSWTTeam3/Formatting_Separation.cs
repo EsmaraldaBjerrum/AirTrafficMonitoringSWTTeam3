@@ -21,6 +21,7 @@ namespace AirTrafficMonitoringSWTTeam3
             _separationInvestigation.SeparationWarningDataEvent += StringToPrintSeparationInFile;
             _logFileLog = Loglog;
             _logScreenLog = screenLog;
+
         }
 
         public void StringToPrintSeparationInFile(object sender, SeparationWarningDataEvent e)
