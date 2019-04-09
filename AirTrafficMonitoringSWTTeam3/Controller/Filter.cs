@@ -7,7 +7,7 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
     public class Filter : IFilter
     {
         public event EventHandler<FilterDataEvent> FilterDataEvent;
-        public List<Aircraft> filterList;
+        private List<Aircraft> filterList;
         private IConverter _converter;
 
         public Filter(IConverter converter)

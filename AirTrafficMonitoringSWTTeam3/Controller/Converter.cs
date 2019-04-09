@@ -9,7 +9,7 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
     {
         public event EventHandler<ConvertDataEvent> ConvertDataEvent;
         private ITransponderReceiver _transponderReceiver;
-        public List<Aircraft> convertedDataList;
+        private List<Aircraft> convertedDataList;
 
 
         public Converter(ITransponderReceiver transponderReceiver)

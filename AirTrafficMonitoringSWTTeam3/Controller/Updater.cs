@@ -9,8 +9,8 @@ namespace AirTrafficMonitoringSWTTeam3.Controler
         private double velocity;
         public event EventHandler<UpdatedDataEvent> UpdatedDataEvent;
         private IFilter _filter;
-        public List<Aircraft> WithDataAircrafts;
-        public List<Aircraft> WithoutDataAircrafts;
+        private List<Aircraft> WithDataAircrafts;
+        private List<Aircraft> WithoutDataAircrafts;
 
         public Updater(IFilter filter)
         {

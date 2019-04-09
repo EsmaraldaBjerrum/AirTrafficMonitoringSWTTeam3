@@ -18,8 +18,8 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         
         private IFilter _fakeFilter;
         private Formatting_Tracks _fakeFT;
-        private SeparationInvestigation _fakeSI;
         private ILog _fakeLog;
+        private UpdatedDataEvent _event;
         [SetUp]
         public void SetUp()
         {
@@ -27,8 +27,10 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeFilter = Substitute.For<IFilter>();
             _uut = new Updater(_fakeFilter);
             _fakeFT = Substitute.For<Formatting_Tracks>(_uut, _fakeLog);
-            _fakeSI = Substitute.For<SeparationInvestigation>(_uut);
+            
 
+            _event = null;
+            _uut.UpdatedDataEvent += (o, args) => { _event = args; };
         }
 
         [Test]
@@ -38,13 +40,19 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         [TestCase("DAA111", 60000, 10000, 1000, "DAA111", 50000, 10000, 1000, 270)]
         public void CalculateCompassCourse_AircraftTravelingNorthSouthEastWest(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add( new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
+            List<Aircraft> testData2 = new List<Aircraft>();
+            testData2.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData2));
+
+            Assert.That(_event.UpdatedData[0].CompassCourse, Is.EqualTo(course1));
         }
 
 
@@ -57,13 +65,19 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         [TestCase("FAA111", 15000, 10000, 1000, "FAA111", 19000, 20010, 1000, 22)]
         public void CalculateCompassCourse_AircraftTravelingBetweenNorthAndEast(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
+            List<Aircraft> testData2 = new List<Aircraft>();
+            testData2.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData2));
+
+            Assert.That(_event.UpdatedData[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -75,13 +89,19 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         [TestCase("FAA111", 5000, 14000, 1000, "FAA111", 15010, 10000, 1000, 112)]
         public void CalculateCompassCourse_AircraftTravelingBetweenEastAndSouth(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
+            List<Aircraft> testData2 = new List<Aircraft>();
+            testData2.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData2));
+
+            Assert.That(_event.UpdatedData[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -93,13 +113,19 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         [TestCase("FAA111", 14000, 15010, 1000, "FAA111", 10000, 5000, 1000, 202)]
         public void CalculateCompassCourse_AircraftTravelingBetweenSouthAndWest(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
+            List<Aircraft> testData2 = new List<Aircraft>();
+            testData2.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData2));
+
+            Assert.That(_event.UpdatedData[0].CompassCourse, Is.EqualTo(course1));
         }
 
         [Test]
@@ -111,13 +137,19 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         [TestCase("FAA111", 15010, 10000, 1000, "FAA111", 5000, 14000, 1000, 292)]
         public void CalculateCompassCourse_AircraftTravelingBetweenWestAndNorth(string t1, int x1, int y1, int a1, string t2, int x2, int y2, int a2, int course1)
         {
-            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
 
-            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _uut.CalculateCompassCourse(_uut.WithoutDataAircrafts);
+            List<Aircraft> testData2 = new List<Aircraft>();
+            testData2.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
 
-            Assert.That(_uut.WithoutDataAircrafts[0].CompassCourse, Is.EqualTo(course1));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData2));
+
+            Assert.That(_event.UpdatedData[0].CompassCourse, Is.EqualTo(course1));
         }
 
 
@@ -127,15 +159,23 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         [TestCase("EDB239", 10000, 60000, 1000, "20191203214726980", "EDB239", 20000, 80000, 1000, "20191203215356990", 57.334)]
         public void HorizontalVelocity(string t1, int x1, int y1, int a1, string ts1, string t2, int x2, int y2, int a2, string ts2, double velocity1)
         {
-            _uut.WithDataAircrafts.Add(new Aircraft(t1, x1, y1, a1, (DateTime.ParseExact(ts1, "yyyyMMddHHmmssfff",
-               System.Globalization.CultureInfo.InvariantCulture))));
+            List<Aircraft> testData = new List<Aircraft>();
+            testData.Add(new Aircraft(t1, x1, y1, a1, (DateTime.ParseExact(ts1, "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture))));
+           
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _uut.WithoutDataAircrafts.Add(new Aircraft(t2, x2, y2, a2, (DateTime.ParseExact(ts2, "yyyyMMddHHmmssfff",
-                 System.Globalization.CultureInfo.InvariantCulture))));
+            List<Aircraft> testData2 = new List<Aircraft>();
+            
 
-            _uut.HorizontalVelocity(_uut.WithoutDataAircrafts);
+            testData2.Add(new Aircraft(t2, x2, y2, a2, (DateTime.ParseExact(ts2, "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture))));
 
-            Assert.That(_uut.WithoutDataAircrafts[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.01));
+            _fakeFilter.FilterDataEvent
+                += Raise.EventWith(this, new FilterDataEvent(testData2));
+
+            Assert.That(_event.UpdatedData[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.01));
         }
 
 
@@ -160,7 +200,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeFilter.FilterDataEvent
                 += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _fakeFT.Received(1).StringToPrintTracksOnScreen(this, new UpdatedDataEvent(_uut.WithDataAircrafts));
+            Assert.That(_event, Is.Not.Null);
 
         }
 
@@ -185,7 +225,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeFilter.FilterDataEvent
                 += Raise.EventWith(this, new FilterDataEvent(testData));
 
-            _fakeSI.Received(1).RunSeparationInvestigation(this, new UpdatedDataEvent(_uut.WithDataAircrafts));
+            Assert.That(_event, Is.Not.Null);
 
         }
 

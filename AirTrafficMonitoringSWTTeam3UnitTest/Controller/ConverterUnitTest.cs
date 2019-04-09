@@ -18,14 +18,14 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
     {
         private Converter _uut;
         private ITransponderReceiver _fakeTransponderReceiver;
-        private Filter _fakeFilter;
+        private ConvertDataEvent _event;
         [SetUp]
         public void SetUp()
         {
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
             _uut = new Converter(_fakeTransponderReceiver);
-            _fakeFilter = Substitute.For<Filter>(_uut);
-
+            _event = null;
+            _uut.ConvertDataEvent += (o, args) => { _event = args; };
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(_uut.convertedDataList.Count.Equals(4));
+            Assert.That(_event.ConvertData.Count.Equals(4));
         }
 
 
@@ -55,11 +55,11 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
             
-            Assert.That(_uut.convertedDataList[0].XCoordinate.Equals(85000));
+            Assert.That(_event.ConvertData[0].XCoordinate.Equals(85000));
         }
 
         [Test]
-        public void COnverterCorrectYCoordinate()
+        public void ConverterCorrectYCoordinate()
         {
             List<string> testData = new List<string>();
             testData.Add("XYZ987;85000;75654;4000;20151006213456789");
@@ -68,7 +68,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(_uut.convertedDataList[0].YCoordinate.Equals(75654));
+            Assert.That(_event.ConvertData[0].YCoordinate.Equals(75654));
         }
         [Test]
         public void ConverterCorrectAltitude()
@@ -80,7 +80,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(_uut.convertedDataList[0].Altitude.Equals(4000));
+            Assert.That(_event.ConvertData[0].Altitude.Equals(4000));
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(_uut.convertedDataList[0].Timestamp.Equals(new DateTime(2015, 10, 06, 21, 34, 56, 789)));
+            Assert.That(_event.ConvertData[0].Timestamp.Equals(new DateTime(2015, 10, 06, 21, 34, 56, 789)));
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(_uut.convertedDataList[0].Tag.Equals("XYZ987"));
+            Assert.That(_event.ConvertData[0].Tag.Equals("XYZ987"));
         }
 
         
@@ -121,7 +121,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            _fakeFilter.Received(1).FilterMethod(this, new ConvertDataEvent(_uut.convertedDataList));
+            Assert.That(_event, Is.Not.Null);
 
         }
     }
