@@ -15,7 +15,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
   public class FormattingSeparationUnitTest
    {
 
-      private LogToScreen _fakePrint;
+      private ILog _fakePrint;
       private Formatting_Separation uut;
       private IUpdater _fakeUpdater;
       private ILog _fakeLoglog;
@@ -26,10 +26,10 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
       [SetUp]
       public void SetUp()
       {
-         _fakePrint = Substitute.For<LogToScreen>();
+         _fakePrint = Substitute.For<ILog>();
         
          _fakeUpdater = Substitute.For<IUpdater>();
-         _fakeLoglog = Substitute.For<LogToLog>();
+         _fakeLoglog = Substitute.For<ILog>();
          _fakeSeparationInvestigation = new SeparationInvestigation(_fakeUpdater);
          uut = new Formatting_Separation(_fakeSeparationInvestigation,_fakePrint,_fakeLoglog);
       }
@@ -44,7 +44,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
 
           uut.StringToPrintSeparationToScreen(this, new SeparationWarningDataEvent(fakeList));
 
-            _fakePrint.Received(1).Log(" WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26");
+            _fakePrint.Received(1).Log("WARNING! Separation condition between SKF and LBS at 03-12-2019 21:34:26");
 
       }
 
