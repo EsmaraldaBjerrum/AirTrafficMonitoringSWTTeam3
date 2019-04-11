@@ -17,7 +17,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
         private Updater _uut;
         
         private IFilter _fakeFilter;
-        private Formatting_Tracks _fakeFT;
+        
         private ILog _fakeLog;
         private UpdatedDataEvent _event;
         [SetUp]
@@ -26,7 +26,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             _fakeLog = Substitute.For<ILog>();
             _fakeFilter = Substitute.For<IFilter>();
             _uut = new Updater(_fakeFilter);
-            _fakeFT = Substitute.For<Formatting_Tracks>(_uut, _fakeLog);
+           
             
 
             _event = null;

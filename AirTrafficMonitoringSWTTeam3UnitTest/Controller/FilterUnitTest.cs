@@ -16,14 +16,14 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
     {
         private Filter _uut;
         private IConverter _fakeConverter;
-        private Updater _fakeUpdater;
+      
         private FilterDataEvent _event;
         [SetUp]
         public void SetUp()
         {
             _fakeConverter = Substitute.For<IConverter>();
             _uut = new Filter(_fakeConverter);
-            _fakeUpdater = Substitute.For<Updater>(_uut);
+            
 
             _event = null;
             _uut.FilterDataEvent += (o, args) => { _event = args; };
@@ -49,12 +49,15 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             testData.Add(new Aircraft("XYZ986", -100, 90654, 4000, DateTime.ParseExact("20151006213456789",
                 "yyyyMMddHHmmssfff",
                 System.Globalization.CultureInfo.InvariantCulture)));
+            testData.Add(new Aircraft("XYZ986", 84000, 654, 4000, DateTime.ParseExact("20151006213456789",
+                "yyyyMMddHHmmssfff",
+                System.Globalization.CultureInfo.InvariantCulture)));
 
             // Act: Trigger the fake object to execute event invocation
             _fakeConverter.ConvertDataEvent
                 += Raise.EventWith(this, new ConvertDataEvent (testData));
 
-            Assert.That(_event.FilterData.Count.Equals(0));
+            Assert.That(_event.FilterData.Count.Equals(2));
         }
 
 
