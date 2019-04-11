@@ -65,6 +65,35 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest
         }
 
         [Test]
+        [TestCase("1AA111", 40000, 51000, 2000, "BAA111", 10000, 5000, 1000, "FAA111", 30000, 10000, 5000, "BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, "EAA111", 30000, 40000, 5000, 2)]
+        [TestCase("BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, "EAA111", 30000, 40000, 5000, "1AA111", 40000, 51000, 2000, "BAA111", 10000, 5000, 1000, "FAA111", 30000, 10000, 5000, 2)]
+        [TestCase("BAA111", 10000, 51000, 1200, "DAA111", 10000, 50000, 1000, "EAA111", 10000, 49000, 800,  "BAA111", 10000, 51000, 1000, "DAA111", 10000, 50000, 1000, "EAA111", 30000, 40000, 5000, 0)]
+        
+        public void AddSeparation_AircraftXAndYAndQIsInSeparation_ZNewSeparationsIsAdded(string t1, int x1, int y1,
+            int a1, string t2, int x2, int y2, int a2, string t3, int x3, int y3, int a3, string t4, int x4, int y4,
+            int a4, string t5, int x5, int y5, int a5, string t6, int x6, int y6, int a6, int numberOfSeparations)
+        {
+            List<Aircraft> testAircraft = new List<Aircraft>();
+            testAircraft.Add(new Aircraft(t1, x1, y1, a1, DateTime.Now));
+            testAircraft.Add(new Aircraft(t2, x2, y2, a2, DateTime.Now));
+            testAircraft.Add(new Aircraft(t3, x3, y3, a3, DateTime.Now));
+
+            fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(testAircraft));
+
+            List<Aircraft> testAircraft2 = new List<Aircraft>();
+            testAircraft2.Add(new Aircraft(t4, x4, y4, a4, DateTime.Now));
+            testAircraft2.Add(new Aircraft(t5, x5, y5, a5, DateTime.Now));
+            testAircraft2.Add(new Aircraft(t6, x6, y6, a6, DateTime.Now));
+
+            fakeUpdater.UpdatedDataEvent += Raise.EventWith(this, new UpdatedDataEvent(testAircraft2));
+
+            
+
+            Assert.That(_event.newSeparationWarningData.Count, Is.EqualTo(numberOfSeparations));
+        }
+
+
+        [Test]
         [TestCase("AAA111", "BBBB111", "CCC111", "DDD111", "EEE111", "FFF111", "GGG111", "HHH111", 2)]
         [TestCase("AAA111", "BBBB111", "GGG111", "HHH111", "EEE111", "FFF111", "GGG111", "HHH111", 1)]
         [TestCase("EEE111", "FFF111", "GGG111", "HHH111", "EEE111", "FFF111", "GGG111", "HHH111", 0)]
