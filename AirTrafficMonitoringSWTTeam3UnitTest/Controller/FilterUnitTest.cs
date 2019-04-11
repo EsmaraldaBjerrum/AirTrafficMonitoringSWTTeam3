@@ -62,7 +62,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
 
 
         [Test]
-        public void FilterCallsUpdater()
+        public void FilterRaisesEvent()
         {
             List<Aircraft> testData = new List<Aircraft>();
             testData.Add(new Aircraft("ATR423", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",

@@ -111,7 +111,7 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
 
         
         [Test]
-        public void ConverterCallsFilter()
+        public void ConverterRaisesEvent()
         {
            List<string> testData = new List<string>();
             testData.Add("XYZ987;84000;75654;4000;20151006213456789");

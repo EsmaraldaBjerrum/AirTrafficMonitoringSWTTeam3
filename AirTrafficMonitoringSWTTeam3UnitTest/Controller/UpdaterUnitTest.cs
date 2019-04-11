@@ -178,34 +178,10 @@ namespace AirTrafficMonitoringSWTTeam3UnitTest.Controller
             Assert.That(_event.UpdatedData[0].HorizontalVelocity, Is.EqualTo(velocity1).Within(00.01));
         }
 
+        
 
         [Test]
-        public void UpdaterCallsFormatting_Tracks()
-        {
-            List<Aircraft> testData = new List<Aircraft>();
-            testData.Add(new Aircraft("ATR423", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
-                "yyyyMMddHHmmssfff",
-                System.Globalization.CultureInfo.InvariantCulture)));
-            testData.Add(new Aircraft("BCD123", 10005, 85001, 12000, DateTime.ParseExact("20151006213456789",
-                "yyyyMMddHHmmssfff",
-                System.Globalization.CultureInfo.InvariantCulture)));
-            testData.Add(new Aircraft("XYZ98", 85000, 75654, 4000, DateTime.ParseExact("20151006213456789",
-                "yyyyMMddHHmmssfff",
-                System.Globalization.CultureInfo.InvariantCulture)));
-            testData.Add(new Aircraft("XYZ986", 90059, 90654, 4000, DateTime.ParseExact("20151006213456789",
-                "yyyyMMddHHmmssfff",
-                System.Globalization.CultureInfo.InvariantCulture)));
-
-            // Act: Trigger the fake object to execute event invocation
-            _fakeFilter.FilterDataEvent
-                += Raise.EventWith(this, new FilterDataEvent(testData));
-
-            Assert.That(_event, Is.Not.Null);
-
-        }
-
-        [Test]
-        public void UpdaterCallsSeparationInvestigation()
+        public void UpdaterRasiesEvent()
         {
             List<Aircraft> testData = new List<Aircraft>();
             testData.Add(new Aircraft("ATR423", 85045, 12932, 14000, DateTime.ParseExact("20151006213456789",
