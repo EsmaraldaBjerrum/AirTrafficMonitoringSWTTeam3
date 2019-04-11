@@ -12,8 +12,8 @@ namespace AirTrafficMonitoringSWTTeam3
     public class SeparationInvestigation
     {
         private IUpdater _updater;
-        public List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
-        public List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
+        private List<SeparationWarningData> oldSeparationWarningData = new List<SeparationWarningData>();
+        private List<SeparationWarningData> newSeparationWarningData = new List<SeparationWarningData>();
         public event EventHandler<SeparationWarningDataEvent> SeparationWarningDataEvent;
 
         public SeparationInvestigation(IUpdater updater)
@@ -26,7 +26,7 @@ namespace AirTrafficMonitoringSWTTeam3
         public void RunSeparationInvestigation(object sender, UpdatedDataEvent e)
         {
             AddSeparations(e.UpdatedData);
-            SeparationController();
+            SeparationController(oldSeparationWarningData, newSeparationWarningData);
 
             if (newSeparationWarningData.Count != 0)
                 SeparationWarningDataEvent?.Invoke(this, (new SeparationWarningDataEvent(newSeparationWarningData)));
@@ -53,17 +53,17 @@ namespace AirTrafficMonitoringSWTTeam3
             }
         }
 
-        public void SeparationController()
+        public void SeparationController(List<SeparationWarningData> oldData, List<SeparationWarningData> newData)
         {
-            List<SeparationWarningData> localNewSeparationWarningData = new List<SeparationWarningData>(newSeparationWarningData);
+            List<SeparationWarningData> localNewSeparationWarningData = new List<SeparationWarningData>(newData);
 
             //List<SeparationWarningData> dataToBeRemoved = new List<SeparationWarningData>();
 
             foreach (SeparationWarningData newSeparationData in localNewSeparationWarningData)
             {
-                if (oldSeparationWarningData.Count != 0)
+                if (oldData.Count != 0)
                 {
-                    foreach (SeparationWarningData oldSeparationData in oldSeparationWarningData)
+                    foreach (SeparationWarningData oldSeparationData in oldData)
                     {
                         if (newSeparationData.AircraftTag1 == oldSeparationData.AircraftTag1 &&
                             newSeparationData.AircraftTag2 == oldSeparationData.AircraftTag2 ||
